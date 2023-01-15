@@ -160,6 +160,17 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "image-to-ascii"
+version = "0.3"
+description = "A simple python library to convert images to ASCII art"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pillow = "*"
+
+[[package]]
 name = "importlib-metadata"
 version = "5.0.0"
 description = "Read metadata from Python packages"
@@ -269,6 +280,18 @@ python-versions = ">=3.6"
 [package.extras]
 qa = ["flake8 (==3.8.3)", "mypy (==0.782)"]
 testing = ["docopt", "pytest (<6.0.0)"]
+
+[[package]]
+name = "pillow"
+version = "9.4.0"
+description = "Python Imaging Library (Fork)"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-issues (>=3.0.1)", "sphinx-removed-in", "sphinxext-opengraph"]
+tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
 [[package]]
 name = "pluggy"
@@ -546,7 +569,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "05c71527dd9734684a4303e81431b5ce6998448d9ff98126ccda7e0040eb2807"
+content-hash = "a023d18ae537c686cebad53caa052c40e23f3651fb79ab2e6a0b616f7732891c"
 
 [metadata.files]
 aiohttp = []
@@ -563,6 +586,7 @@ dnspython = []
 flask = []
 frozenlist = []
 idna = []
+image-to-ascii = []
 importlib-metadata = []
 itsdangerous = []
 jedi = []
@@ -573,6 +597,7 @@ multidict = []
 numpy = []
 packaging = []
 parso = []
+pillow = []
 pluggy = []
 psutil = []
 pyflakes = []

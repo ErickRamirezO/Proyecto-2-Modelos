@@ -5,7 +5,7 @@ import os,estudiante,Biblioteca,baseDatos
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzM4MjAyNjYsImlhdCI6MTY3MzcwODY2NiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.yvV7rTJBFyQ3focAr8tK0p1X7gLS85o6K04J_saXfpqUaXV7h4e0s5gq_Zc78PstwEhnUxCBDauGw5_tpp4cew")
 
 #variable mensaje que contiene todo el menú de opciones escrito
-mensajePrincipal = """Biblioteca 📚(nombre)
+mensajePrincipal = """BiblioSolutions 📚
 ----------------------------------
 1 - Registrar un estudiante por carrera
 2 - Catálogo: buscar y encontrar libros, revistas, tesis, etc.
@@ -29,7 +29,12 @@ mensajePrincipal = """Biblioteca 📚(nombre)
 
 def menu():
 	print(f"\033[36m{mensajePrincipal}")
-	opcion = int(input("\033[33mIngresa una opción: "))
+	while True:
+	    try:
+	        opcion = int(input("\033[0mIngrese una opción: "))
+	        break
+	    except ValueError:
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
 	match opcion:
 		case 1:
 			system('clear')
@@ -37,24 +42,24 @@ def menu():
 			estudiante.registro()
 		case 2:
 			system('clear')
-			print("\033[0m---Catálogo Biblioteca (nombre)---\n")
+			print("\033[0m---Catálogo BiblioSolutions---\n")
 			Biblioteca.catalogo()
 		case 3:
 			system('clear')
 			print("\033[0m---Reserva de libros---\n")
-			db.prompt_update_contact()
+			Biblioteca.ingresoDatosParaReservaLibro()
 		case 4:
 			system('clear')
 			print("\033[0m---Prestamo de libros---\n")
-			db.prompt_delete_contact()
+			Biblioteca.prestamoLibros()
 		case 5:
 			system('clear')
 			print("\033[0m---Notificaciones---\n")
-			db.prompt_delete_contact()
+			estudiante.notificacion()
 		case 6:
 			system('clear')
 			print("\033[0m---Seguimiento libros---\n")
-			db.prompt_delete_contact()
+			baseDatos.seguimientoLibros()
 		case 7:
 			system('clear')
 			print("\033[0m---Gestión de usuarios---\n")
