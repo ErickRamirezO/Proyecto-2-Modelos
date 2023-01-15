@@ -1,5 +1,5 @@
 import baseDatos 
-
+from os import system
 #validacion nombre y apellido
 def validarNombreApellido(text):
 	nombre = text.split()
@@ -28,4 +28,18 @@ def registro():
 #punto 5
 def notificacion():
 	pass
-		
+
+
+#punto 15
+def historialPrestamosReservas():
+	nombre = input("\033[0mIngrese el nombre y apellido del estudiante: ").lower()
+	#verificar que ingrese solo letras y se verifica en la base de datos el nombre del estudiante
+	if baseDatos.obtenerEstudiante(nombre):
+	    print("\033[0mEl nombre ingresado es \033[32mcorrecto")
+		# Se obtiene el historial
+	    baseDatos.obtenerHistorialReservasPrestamos(nombre)
+	else:
+	    print("\033[31mLa entrada no es válida, no se encuentra en la base de datos")
+	    input("\n\033[0mPresione una tecla para continuar... ")
+	    system("clear")
+	    historialPrestamosReservas()

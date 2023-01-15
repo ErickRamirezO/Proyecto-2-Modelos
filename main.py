@@ -2,7 +2,7 @@ from replit import Database
 from os import system
 import os,estudiante,Biblioteca,baseDatos
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzM4MjAyNjYsImlhdCI6MTY3MzcwODY2NiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.yvV7rTJBFyQ3focAr8tK0p1X7gLS85o6K04J_saXfpqUaXV7h4e0s5gq_Zc78PstwEhnUxCBDauGw5_tpp4cew")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzM5MzM3MDEsImlhdCI6MTY3MzgyMjEwMSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.WYzCVezQE42tA51B3DGNV5epecLY5wj9Px4t31QItFxRMxbidF21iLvKi0tc4948fZPwXLl_LWPPU1yE8_PUzw")
 
 #variable mensaje que contiene todo el menú de opciones escrito
 mensajePrincipal = """BiblioSolutions 📚
@@ -95,7 +95,7 @@ def menu():
 		case 15:
 			system('clear')
 			print("\033[0m---Historial de préstamos---\n")
-			db.prompt_delete_contact()
+			estudiante.historialPrestamosReservas()
 		case 16:
 			system('clear')
 			print("\033[0m---Reservas de salas de estudio---\n")
@@ -105,9 +105,10 @@ def menu():
 			exit()
 		case 18:
 			print("Datos\n")
-			keys = db. keys( )
-			for key in keys:
-				print(f"""\n{key}: {db[key]}""")
+			#keys = db. keys( )
+			print(db["Estudiantes"])
+			#for key in keys:
+			#	print(f"""\n{key}: {db[key]}""")
 
 
 if __name__ == "__main__":
@@ -118,6 +119,7 @@ if __name__ == "__main__":
 	while True:
 		#Limpiamos la pantalla
 		system('clear')
+		#print(os.getenv("REPLIT_DB_URL"))
 		#llamada a la función menu
 		menu()
 		#solicitamos al usuario que persione cualquier tecla

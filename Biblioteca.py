@@ -13,11 +13,17 @@ def catalogo():
 	        print("\033[31mEntrada inválida, ingrese solo numeros")
 	match opcion:
 		case 1:
-			titulo = input("Ingrese el titulo del libro: ").lower()
-			baseDatos.buscarLibro(titulo)
+			titulo = input("\033[0mIngrese el titulo del libro: ").lower()
+			if baseDatos.validarbusquedaLibro(titulo):
+				baseDatos.buscarLibro(titulo)
+			else:
+				print("\033[31mLo sentimos no hubo éxito en su búsqueda por titulo...")
 		case 2:
-			autor = input("Ingrese el autor del libro: ").lower()
-			baseDatos.buscarLibro(autor)
+			autor = input("\033[0mIngrese el autor del libro: ").lower()
+			if baseDatos.validarbusquedaLibro(autor):
+				baseDatos.buscarLibro(autor)
+			else:
+				print("\033[31mLo sentimos no hubo éxito en su búsqueda por autor...")
 
 #punto 3
 def reservaLibros(nombre,reserva_o_prestamos):
@@ -53,7 +59,7 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    print("\033[31mLa entrada no es válida, no se encuentra en la base de datos")
 	    input("\n\033[0mPresione una tecla para continuar... ")
 	    system("clear")
-	    ingresoDatosParaReservaOPrestamoLibro()
+	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
 		
 	
 #punto 4
