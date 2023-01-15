@@ -47,11 +47,11 @@ def menu():
 		case 3:
 			system('clear')
 			print("\033[0m---Reserva de libros---\n")
-			Biblioteca.ingresoDatosParaReservaLibro()
+			Biblioteca.ingresoDatosParaReservaOPrestamoLibro(1)
 		case 4:
 			system('clear')
 			print("\033[0m---Prestamo de libros---\n")
-			Biblioteca.prestamoLibros()
+			Biblioteca.ingresoDatosParaReservaOPrestamoLibro(2)
 		case 5:
 			system('clear')
 			print("\033[0m---Notificaciones---\n")
@@ -103,6 +103,12 @@ def menu():
 		case 17:
 			print(f"\033[36mGracias... ¡Vuelve pronto!")
 			exit()
+		case 18:
+			print("Datos\n")
+			keys = db. keys( )
+			for key in keys:
+				print(f"""\n{key}: {db[key]}""")
+
 
 if __name__ == "__main__":
 	#Se carga la base de datos de libros

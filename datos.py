@@ -18,3 +18,4 @@ estudiantes=["Juan Pérez","Maria González","Carlos Rodriguez","Ana López","Jo
 #lista con la carrera de cada estudiante
 carrera = ["Biotecnología","Adm. de Empresas","Medicina","Tics","Ing. Mecatrónica","Ing. Mecánica","Ing. Industrial","Ing. Software","Biotecnología","Derecho","Derecho","Tics","Biotecnología","Medicina","Adm. de Empresas"]
 numero_libros_reservados = [3,1,2,3,2,1,1,1,2,2,2,3,2,3,1]
+numero_libros_prestados = [10,13,0,2,2,5,6,4,7,9,11,3,12,0,1]

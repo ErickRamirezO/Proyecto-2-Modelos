@@ -21,11 +21,12 @@ def cargarDBLibros():
 def cargarDBEstudiantes():
 	print("Cargando base de datos de estudiantes...")
 		#diccionario estudiantes
-	db["Estudiantes"]=db["Carrera_estudiantes"]=db["Numero_libros_reservados"]=[]
+	db["Estudiantes"]=db["Carrera_estudiantes"]=db["Numero_libros_reservados"]=db["Numero_libros_prestados"]=[]
 	for i in range(len(Datos.estudiantes)):
 		db["Estudiantes"].append(Datos.estudiantes[i])
 		db["Carrera_estudiantes"].append(Datos.carrera[i])
 		db["Numero_libros_reservados"].append(Datos.numero_libros_reservados[i])
+		db["Numero_libros_prestados"].append(Datos.numero_libros_prestados[i])
 	print("\033[32mEstudiantes cargados exitosamente")
 	
 @profile
@@ -37,7 +38,58 @@ def registro_estudiante(nombre,carrera):
 		# Agregar el nuevo estudiante a la base de datos de replit
 		db["Estudiantes"].append(nombre)
 		db["Carrera_estudiantes"].append(carrera)
+		db["Numero_libros_reservados"].append(0)
 		return '\033[32mEstudiante registrado exitosamente'
+		
+#punto 3 y 4
+def obtenerLibros():
+	print("\033[0m{:^8}\033[33m{:^40}\033[36m{:^28}\033[32m{:^14}".format("Número","Libros","Autor","Disponibilidad"))
+	for i in range(len(db["Titulos_libros"])):
+		print("\033[0m{:^8}{:^40}{:^28}{:^14}".format(i+1,db["Titulos_libros"][i],db["Autores_libros"][i],db["Disponibilidad"][i]))
+
+def validarEjemplarDisponible(i):
+	if db["Disponibilidad"][i] == "Si":
+		return True
+	return False
+
+def obtenerEstudiante(nombre_estudiante):
+	for i in range(len(db["Estudiantes"])):
+		if db["Estudiantes"][i].lower() == nombre_estudiante:
+			return True
+	return False
+
+def validarNumeroReservaLibros(nombre_estudiante):
+	for i in range(len(db["Estudiantes"])):
+		if db["Estudiantes"][i].lower() == nombre_estudiante:
+			return db["Numero_libros_reservados"][i]
+
+def actualizarLibrosReservados(nombre_estudiante,numeroLibroReservar,reserva_o_prestamo):
+	db["Libros_reservados_"+nombre_estudiante] = []
+	for i in range(len(db["Estudiantes"])):
+		if db["Estudiantes"][i].lower() == nombre_estudiante:
+			#1 para reserva y 2 para prestamo
+			if reserva_o_prestamo == 1:
+				db["Numero_libros_reservados"][i] = db["Numero_libros_reservados"][i] + 1
+				db["Libros_reservados_"+nombre_estudiante].append(db["Titulos_libros"][numeroLibroReservar])
+				print("\033[32m ¡Ejemplar reservado con éxito!")
+			else:
+				db["Libros_prestados_"+nombre_estudiante].append(db["Titulos_libros"][numeroLibroReservar])
+				print("\033[32m ¡Ejemplar prestado con éxito!")
+#fin punto 3 y 4
+			
+#punto 6
+def seguimientoLibros():
+	print("\033[33m{:^40}{:^28}{:^14}{:^18}{:^40}{:^14}".format("Libros","Autor","Disponibilidad","Número de copias","Ubicacion","Conservación"))
+	for i in range(len(db["Titulos_libros"])):
+		print("\033[0m{:^40}{:^28}{:^14}{:^18}{:^40}{:^9}".format(db["Titulos_libros"][i],db["Autores_libros"][i],db["Disponibilidad"][i],db["Copias_disponibles"][i],db["Ubicacion"][i],db["Conservacion"][i]))
+
+def buscarLibro(libro):
+	for i in range(len(db["Titulos_libros"])):
+		if db["Titulos_libros"][i].lower() == libro or db["Autores_libros"][i].lower() == libro:
+			print(f"""\n\033[0m Se encontró el siguiente libro\n\n\033[33m{db["Titulos_libros"][i]} de {db["Autores_libros"][i]}""")
+			print(f"""\033[0mDisponible: \033[36m{db["Disponibilidad"][i]}""")
+	else:
+		print("\033[31mNo se encontró ningún libro con ese titulo o autor ingresado")
 
 #punto 7
 def actualizarUsuario():
@@ -59,38 +111,4 @@ def actualizarUsuario():
 		else:
 			print("\033[0m{:^8}{:^20}{:^25}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i]))
 
-#punto 3 y 4
-def obtenerLibros():
-	print("\033[0m{:^8}\033[33m{:^40}\033[36m{:^28}\033[32m{:^14}".format("Número","Libros","Autor","Disponibilidad"))
-	for i in range(len(db["Titulos_libros"])):
-		print("\033[0m{:^8}{:^40}{:^28}{:^14}".format(i+1,db["Titulos_libros"][i],db["Autores_libros"][i],db["Disponibilidad"][i]))
-
-def validarEjemplarDisponible(i):
-	if db["Disponibilidad"][i] == "Si":
-		return True
-	return False
-
-def validarNumeroReservaLibros(nombre_estudiante):
-	for i in range(len(db["Estudiantes"])):
-		if db["Estudiantes"][i].lower() == nombre_estudiante:
-			return db["Numero_libros_reservados"][i]
-
-def obtenerEstudiante(nombre_ingresado):
-	for i in range(len(db["Estudiantes"])):
-		if db["Estudiantes"][i].lower() == nombre_ingresado:
-			return True
-	return False
-#punto 6
-def seguimientoLibros():
-	print("\033[33m{:^40}{:^28}{:^14}{:^18}{:^40}{:^14}".format("Libros","Autor","Disponibilidad","Número de copias","Ubicacion","Conservación"))
-	for i in range(len(db["Titulos_libros"])):
-		print("\033[0m{:^40}{:^28}{:^14}{:^18}{:^40}{:^9}".format(db["Titulos_libros"][i],db["Autores_libros"][i],db["Disponibilidad"][i],db["Copias_disponibles"][i],db["Ubicacion"][i],db["Conservacion"][i]))
-
-def buscarLibro(libro):
-	for i in range(len(db["Titulos_libros"])):
-		if db["Titulos_libros"][i].lower() == libro or db["Autores_libros"][i].lower() == libro:
-			print(f"""\n\033[0m Se encontró el siguiente libro\n\n\033[33m{db["Titulos_libros"][i]} de {db["Autores_libros"][i]}""")
-			print(f"""\033[0mDisponible: \033[36m{db["Disponibilidad"][i]}""")
-	else:
-		print("\033[31mNo se encontró ningún libro con ese titulo o autor ingresado")
-
+	

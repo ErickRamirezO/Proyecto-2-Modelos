@@ -20,7 +20,7 @@ def catalogo():
 			baseDatos.buscarLibro(autor)
 
 #punto 3
-def reservaLibros():
+def reservaLibros(nombre,reserva_o_prestamos):
 	baseDatos.obtenerLibros()
 	while True:
 	    try:
@@ -29,32 +29,31 @@ def reservaLibros():
 	    except ValueError:
 	        print("\033[31mEntrada inválida, ingrese solo numeros")
 	if baseDatos.validarEjemplarDisponible(opcion-1) == False:
-		print("\033[31m El ejemplar elegido no se puede reservar porque no se encuentra disponible elija otro")
+		print("\033[31m El ejemplar elegido no se puede reservar o prestar porque no se encuentra disponible elija otro")
 		input("\n\033[0mPresione una tecla para continuar... ")
 		system("clear")
-		reservaLibros()
+		reservaLibros(nombre)
 	else:
-		print("\033[32m ¡Ejemplar reservado con éxito!")
-		#anadir a la base de datos la reserva que ha hecho aumentar en numero y en la lista de libros reservados de cada estudiante
-		#[reserva_nombre_estudiante] = [lista con todas las reservas]
+		baseDatos.actualizarLibrosReservados(nombre,opcion-1,reserva_o_prestamos)
 	
-def ingresoDatosParaReservaLibro():
+def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	nombre = input("\033[0mIngrese el nombre y apellido del estudiante: ").lower()
 	#verificar que ingrese solo letras y se verifica en la base de datos el nombre del estudiante
 	if baseDatos.obtenerEstudiante(nombre):
 	    print("\033[0mEl nombre ingresado es \033[32mcorrecto")
 		# Se verifica que no tenga más de 3 libros reservados
-	    numero_libros_reservados = baseDatos.validarNumeroReservaLibros(nombre)
-	    if numero_libros_reservados<=3: 
+	    if baseDatos.validarNumeroReservaLibros(nombre)<3: 
 		    print("\033[33m Puede hacer la reserva de un libro\n")
-		    reservaLibros()
+		    input("\n\033[0mPresione una tecla para continuar... ")
+		    system("clear")
+		    reservaLibros(nombre,reserva_o_prestamos)
 	    else:
-		    print("\033[31m Lo sentimos no puede hacer la reserva de su libro porque alcanzo el número máximo de reservas (3)")
+		    print("\033[31m Lo sentimos no puede hacer la reserva de un libro porque alcanzo el número máximo de reservas (3)")
 	else:
 	    print("\033[31mLa entrada no es válida, no se encuentra en la base de datos")
 	    input("\n\033[0mPresione una tecla para continuar... ")
 	    system("clear")
-	    ingresoDatosParaReservaLibro()
+	    ingresoDatosParaReservaOPrestamoLibro()
 		
 	
 #punto 4
