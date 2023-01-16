@@ -3,6 +3,7 @@ from memory_profiler import profile
 import big_o,os
 import datos as Datos
 from os import system
+import statistics as estadisticas
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzM5MzM3MDEsImlhdCI6MTY3MzgyMjEwMSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.WYzCVezQE42tA51B3DGNV5epecLY5wj9Px4t31QItFxRMxbidF21iLvKi0tc4948fZPwXLl_LWPPU1yE8_PUzw")
 
 
@@ -21,12 +22,13 @@ def cargarDBLibros():
 def cargarDBEstudiantes():
 	print("Cargando base de datos de estudiantes...")
 		#diccionario estudiantes
-	db["Estudiantes"]=db["Carrera_estudiantes"]=db["Numero_libros_reservados"]=db["Numero_libros_prestados"]=[]
+	db["Estudiantes"]=db["Carrera_estudiantes"]=db["Numero_libros_reservados"]=db["Numero_libros_prestados"]=db["Numero_Visitas_Estudiante"]=[]
 	for i in range(len(Datos.estudiantes)):
 		db["Estudiantes"].append(Datos.estudiantes[i])
 		db["Carrera_estudiantes"].append(Datos.carrera[i])
 		db["Numero_libros_reservados"].append(Datos.numero_libros_reservados[i])
 		db["Numero_libros_prestados"].append(Datos.numero_libros_prestados[i])
+		db["Numero_Visitas_Estudiante"].append(Datos.numero_visitas_estudiante[i])
 	print("\033[32mEstudiantes cargados exitosamente")
 	
 @profile
@@ -39,6 +41,7 @@ def registro_estudiante(nombre,carrera):
 		db["Estudiantes"].append(nombre)
 		db["Carrera_estudiantes"].append(carrera)
 		db["Numero_libros_reservados"].append(0)
+		db["Numero_Visitas_Estudiante"].append(0)
 		return '\033[32mEstudiante registrado exitosamente'
 		
 #punto 3 y 4
@@ -118,7 +121,23 @@ def actualizarUsuario():
 			print("\033[0m{:^8}{:^20}{:^25}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i]))
 
 
-
+#punto 12
+#Qué estudiante visitó más y menos la biblioteca
+#visita promedio a la biblioteca
+def obtenerVisitasBiblioteca():
+	promedio_visitas = suma_visitas = n = 0
+	maximo = max(db["Numero_Visitas_Estudiante"])
+	minimo = min(db["Numero_Visitas_Estudiante"])
+	print("\033[0m{:^8}\033[33m{:^20}\033[32m{:^21}".format("Número","Estudiante","Número de visitas"))
+	for i in range(len(db["Estudiantes"])):
+		print("\033[0m{:^8}{:^20}{:^21}".format(i+1,db["Estudiantes"][i],db["Numero_Visitas_Estudiante"][i]))
+		suma_visitas = suma_visitas + db["Numero_Visitas_Estudiante"][i]
+		n = n + 1
+	promedio_visitas = suma_visitas/n
+	print(f"\nEl promedio de visitas a la biblioteca: {round(promedio_visitas,2)}")
+	print(f"La cantidad de visitas máximas a la biblioteca es: {maximo}")
+	print(f"La cantidad de visitas mínimas a la biblioteca es: {minimo}")
+	
 #punto 15
 def obtenerHistorialReservasPrestamos(nombre_estudiante):
 	nombre = nombre_estudiante.split()

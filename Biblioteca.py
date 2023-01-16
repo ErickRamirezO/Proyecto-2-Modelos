@@ -61,7 +61,3 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    system("clear")
 	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
 		
-	
-#punto 4
-def prestamoLibros():
-	pass

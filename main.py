@@ -82,8 +82,8 @@ def menu():
 			db.prompt_delete_contact()
 		case 12:
 			system('clear')
-			print("\033[0m---Estadísticas sobre el número de visitas a la biblioteca---\n")
-			db.prompt_delete_contact()
+			print("\033[0m---Estadísticas sobre el número de visitas a la biblioteca---\n\n")
+			baseDatos.obtenerVisitasBiblioteca()
 		case 13:
 			system('clear')
 			print("\033[0m---Estadísticas del número de libros prestados, el número de multas, etc.---\n")
@@ -109,6 +109,8 @@ def menu():
 			print(db["Estudiantes"])
 			#for key in keys:
 			#	print(f"""\n{key}: {db[key]}""")
+		case _:
+			print("\033[31mIngrese una opción válida")
 
 
 if __name__ == "__main__":
