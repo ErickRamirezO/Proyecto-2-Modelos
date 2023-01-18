@@ -17,8 +17,6 @@
 
 ## About The Project
 
-![Screen Shot](images/screenshot.png)
-
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
 Here's why:
@@ -96,7 +94,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Acknowledgements
 
-* [ShaanCoding](https://github.com/ShaanCoding/)
-* [Othneil Drew](https://github.com/othneildrew/Best-README-Template)
-* [ImgShields](https://shields.io/)
+* [ErickRamirezO]([https://github.com/ShaanCoding/](https://github.com/ErickRamirezO))
+* [adalicarvajal]([https://github.com/othneildrew/Best-README-Template](https://github.com/adalicarvajal))
 
