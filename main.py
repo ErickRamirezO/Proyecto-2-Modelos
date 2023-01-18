@@ -2,7 +2,7 @@ from replit import Database
 from os import system
 import os,estudiante,Biblioteca,baseDatos
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzM5MzM3MDEsImlhdCI6MTY3MzgyMjEwMSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.WYzCVezQE42tA51B3DGNV5epecLY5wj9Px4t31QItFxRMxbidF21iLvKi0tc4948fZPwXLl_LWPPU1yE8_PUzw")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQwODUwMTUsImlhdCI6MTY3Mzk3MzQxNSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.uCWuC_Yz2H_uW1wGBFJP6DFuDgdlfSp737vEUCFixozMH-q5FRqKyX7MQtZPC4uOEJAsyWgQfIeDTA3ywSpgLg")
 
 #variable mensaje que contiene todo el menú de opciones escrito
 mensajePrincipal = """BiblioSolutions 📚
@@ -23,7 +23,8 @@ mensajePrincipal = """BiblioSolutions 📚
 14.- Sistema de gestión de la biblioteca
 15.- Historial de préstamos
 16.- Reservas de salas de estudio
-17.- Salir
+17.- Calculo Complejidad de tiempo y espacio 
+18.- Salir
 ----------------------------------
 """
 
@@ -101,14 +102,16 @@ def menu():
 			print("\033[0m---Reservas de salas de estudio---\n")
 			db.prompt_delete_contact()
 		case 17:
+			print("\033[0m---Calculo Complejidad tiempo y espacio---\n")
+		case 18: 
 			print(f"\033[36mGracias... ¡Vuelve pronto!")
 			exit()
-		case 18:
+		case 19:
 			print("Datos\n")
-			#keys = db. keys( )
-			print(db["Estudiantes"])
-			#for key in keys:
-			#	print(f"""\n{key}: {db[key]}""")
+			keys = db. keys( )
+			#print(db["Estudiantes"])
+			for key in keys:
+				print(f"""\n{key}: {db[key]}""")
 		case _:
 			print("\033[31mIngrese una opción válida")
 
@@ -121,7 +124,7 @@ if __name__ == "__main__":
 	while True:
 		#Limpiamos la pantalla
 		system('clear')
-		#print(os.getenv("REPLIT_DB_URL"))
+#		print(os.getenv("REPLIT_DB_URL"))
 		#llamada a la función menu
 		menu()
 		#solicitamos al usuario que persione cualquier tecla

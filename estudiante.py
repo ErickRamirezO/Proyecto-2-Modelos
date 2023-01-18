@@ -8,7 +8,8 @@ def validarNombreApellido(text):
 	else:
 		return False
 
-#punto 1
+#punto 1 
+	#Usar función split para validar qhe ingrese nombre y apellido 
 def registro():
 	while True:
 		nombre = input("Ingrese el nombre del estudiante: ")
