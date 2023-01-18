@@ -1,8 +1,4 @@
-# Proyecto-2-Modelos
-Bilbioteca
-Integrantes: 
-  Lisbeth-Carvajal
-  Erick_Ramírez<br/>
+<br/>
 <p align="center">
   <a href="https://github.com/ShaanCoding/BiblioSolution">
     <img src="https://cdn-icons-png.flaticon.com/512/732/732397.png" alt="Logo" width="80" height="80">
