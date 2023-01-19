@@ -468,6 +468,14 @@ doc = ["sphinx-rtd-theme (>=1.0.0)", "sphinx-autodoc-typehints (>=1.18.1)", "sph
 dev = ["build (>=0.7.0)", "pytest-timeout (>=2.1.0)", "pytest (>=7.0.1)"]
 
 [[package]]
+name = "schedule"
+version = "1.1.0"
+description = "Job scheduling for humans."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -569,7 +577,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "a023d18ae537c686cebad53caa052c40e23f3651fb79ab2e6a0b616f7732891c"
+content-hash = "09f3ed7534ba7101491b2c0f7f5c28025bdebf8b463d8a2fa3322f3ecd0fc8b2"
 
 [metadata.files]
 aiohttp = []
@@ -609,6 +617,7 @@ replit = []
 replit-python-lsp-server = []
 requests = []
 rope = []
+schedule = []
 toml = []
 tomli = []
 typing-extensions = []

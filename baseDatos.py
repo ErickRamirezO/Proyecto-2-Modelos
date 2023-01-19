@@ -1,11 +1,9 @@
 from replit import Database
 from memory_profiler import profile
-import big_o,os
+import big_o,os,main
 import datos as Datos
 from os import system
-import statistics as estadisticas
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQwODUwMTUsImlhdCI6MTY3Mzk3MzQxNSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.uCWuC_Yz2H_uW1wGBFJP6DFuDgdlfSp737vEUCFixozMH-q5FRqKyX7MQtZPC4uOEJAsyWgQfIeDTA3ywSpgLg")
-
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQyMDIzODQsImlhdCI6MTY3NDA5MDc4NCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.0AECGjcAlygu1w-9wOyuqOXav5BjfLZg67FdeQua-k84gywG6RwxGAsSmSk7d0o4AvHquo_H2hdo3SexlW6z0Q")
 
 def cargarDBLibros():
 	print("Cargando base de datos libros...")
@@ -30,8 +28,28 @@ def cargarDBEstudiantes():
 		db["Numero_libros_prestados"].append(Datos.numero_libros_prestados[i])
 		db["Numero_Visitas_Estudiante"].append(Datos.numero_visitas_estudiante[i])
 	print("\033[32mEstudiantes cargados exitosamente")
-	
-@profile
+
+#extra
+def listadoEstudiantes():
+	print("Estudiantes ingresados")
+	print("----------------------")
+	print("\033[0m{:^8}\033[33m{:^20}\033[32m{:^25}".format("Número","Estudiante","Carrera"))
+	for i in range(len(db["Estudiantes"])):
+		print("\033[0m{:^8}{:^20}{:^25}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i]))
+
+#extra punto numero 5
+def listadoEstudiantesReserva():
+	print("Estudiantes ingresados")
+	print("----------------------")
+	print("Los estudiantes que tienen reservados libros se marcan de color verde")
+	print("\033[0m{:^8}\033[33m{:^20}\033[35m{:^25}\033[31m{:^25}".format("Número","Estudiante","Carrera","Libros reservados"))
+	for i in range(len(db["Estudiantes"])):
+		if db["Numero_libros_reservados"][i] > 0:
+			print("\033[32m{:^8}{:^20}{:^25}{:^25}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i],db["Numero_libros_reservados"][i]))
+		else:
+			print("\033[0m{:^8}{:^20}{:^25}{:^25}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i],db["Numero_libros_reservados"][i]))
+
+
 def registro_estudiante(nombre,carrera):
 	for i in range(len(db["Estudiantes"])):
 		if str(nombre) in db["Estudiantes"][i]:
@@ -102,12 +120,10 @@ def buscarLibro(libro):
 
 #punto 7
 def actualizarUsuario():
-	print("Estudiantes ingresados")
-	print("----------------------")
-	print("\033[0m{:^8}\033[33m{:^20}\033[32m{:^25}".format("Número","Estudiante","Carrera"))
-	for i in range(len(db["Estudiantes"])):
-		print("\033[0m{:^8}{:^20}{:^25}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i]))
-	num_est = int(input("\033[36mIngrese el número de estudiante a actualizar los datos: "))
+	listadoEstudiantes()
+	num_est = int(input("\033[36m\n\n> Para volver al menú digite [0]\nIngrese el número de estudiante a actualizar los datos: "))
+	if num_est == 0:
+		main.regresarmenu()
 	nuevo_nombre = input("Ingrese nombre y apellido del estudiante: ")
 	nueva_carrera = input("Ingrese la carrera del estudiante: ")
 	db["Estudiantes"][num_est-1] = nuevo_nombre

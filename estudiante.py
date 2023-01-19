@@ -1,4 +1,4 @@
-import baseDatos 
+import baseDatos, main,re
 from os import system
 #validacion nombre y apellido
 def validarNombreApellido(text):
@@ -12,29 +12,40 @@ def validarNombreApellido(text):
 	#Usar función split para validar qhe ingrese nombre y apellido 
 def registro():
 	while True:
-		nombre = input("Ingrese el nombre del estudiante: ")
-		if validarNombreApellido(nombre):
-			print("\033[32mNombre válido")
-		break
-	else:
-		print("\033[31mNombre inválida, ingrese nombre y apellido")
+	    try:
+	        opcion = int(input("[0] Volver al menú\n[1] Ver lista de usuarios\nIngrese una opción: "))
+	        break
+	    except ValueError:
+	        print("Por favor, ingrese solo números.")
+	        system("clear")
+	if opcion == 0:
+		main.regresarmenu()
+	baseDatos.listadoEstudiantes()
+	while True:
+		nombre =input("\nIngrese el nombre y apellido del estudiante nuevo: ")
+		if (re.match("^[a-zA-Z]*$", nombre) and 	validarNombreApellido(nombre)):
+			print("\033[31mNombre inválida, ingrese nombre y apellido")
+			break
+		else:
+			print("Por favor, ingrese solo letras.")
 	carrera = input("\033[0mIngrese la carrera: ")
-	if not nombre or not carrera:
-		return "\033[31mTodos los campos deben estar completos."
-	if not isinstance(nombre, str):
-		return "\033[31mEl nombre debe ser una cadena de caracteres"
 	print(f"\nAñadiendo al estudiante {nombre} de la carrera {carrera}")
 	baseDatos.registro_estudiante(nombre,carrera)
 
 #punto 5
 def notificacion():
-	pass
-
+	baseDatos.listadoEstudiantesReserva()
+	
 
 #punto 15
 def historialPrestamosReservas():
-	nombre = input("\033[0mIngrese el nombre y apellido del estudiante: ").lower()
-	#verificar que ingrese solo letras y se verifica en la base de datos el nombre del estudiante
+	while True:
+		nombre =input("\nIngrese el nombre y apellido del estudiante nuevo: ").lower()
+		if (re.match("^[a-zA-Z]*$", nombre) and validarNombreApellido(nombre)):
+			print("\033[31mNombre inválida, ingrese nombre y apellido")
+			break
+		else:
+			print("Por favor, ingrese solo letras.")
 	if baseDatos.obtenerEstudiante(nombre):
 	    print("\033[0mEl nombre ingresado es \033[32mcorrecto")
 		# Se obtiene el historial

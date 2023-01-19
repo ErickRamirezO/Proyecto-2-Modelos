@@ -2,8 +2,12 @@ from replit import Database
 from os import system
 import os,estudiante,Biblioteca,baseDatos
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQwODUwMTUsImlhdCI6MTY3Mzk3MzQxNSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.uCWuC_Yz2H_uW1wGBFJP6DFuDgdlfSp737vEUCFixozMH-q5FRqKyX7MQtZPC4uOEJAsyWgQfIeDTA3ywSpgLg")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQyMDIzODQsImlhdCI6MTY3NDA5MDc4NCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.0AECGjcAlygu1w-9wOyuqOXav5BjfLZg67FdeQua-k84gywG6RwxGAsSmSk7d0o4AvHquo_H2hdo3SexlW6z0Q")
 
+def regresarmenu():
+	system("clear")
+	menu()
+	
 #variable mensaje que contiene todo el menú de opciones escrito
 mensajePrincipal = """BiblioSolutions 📚
 ----------------------------------
@@ -36,6 +40,8 @@ def menu():
 	        break
 	    except ValueError:
 	        print("\033[31mEntrada inválida, ingrese solo numeros")
+	        system("clear")
+	        menu()
 	match opcion:
 		case 1:
 			system('clear')
@@ -56,6 +62,7 @@ def menu():
 		case 5:
 			system('clear')
 			print("\033[0m---Notificaciones---\n")
+			print(">Se han enviado notificaciones a los siguientes usuarios")
 			estudiante.notificacion()
 		case 6:
 			system('clear')
@@ -68,19 +75,19 @@ def menu():
 		case 8:
 			system('clear')
 			print("\033[0m---Sistema de multas---\n")
-			db.prompt_delete_contact()
+			
 		case 9:
 			system('clear')
 			print("\033[0m---Servicios en línea---\n")
-			db.prompt_delete_contact()
+			
 		case 10:
 			system('clear')
 			print("\033[0m---Registro de devolución de los libros---\n")
-			db.prompt_delete_contact()
+			
 		case 11:
 			system('clear')
 			print("\033[0m---Generar informe de la biblioteca---\n")
-			db.prompt_delete_contact()
+			
 		case 12:
 			system('clear')
 			print("\033[0m---Estadísticas sobre el número de visitas a la biblioteca---\n\n")
@@ -88,11 +95,11 @@ def menu():
 		case 13:
 			system('clear')
 			print("\033[0m---Estadísticas del número de libros prestados, el número de multas, etc.---\n")
-			db.prompt_delete_contact()
+			
 		case 14:
 			system('clear')
 			print("\033[0m---Sistema de gestión de la biblioteca---\n")
-			db.prompt_delete_contact()
+			
 		case 15:
 			system('clear')
 			print("\033[0m---Historial de préstamos---\n")
@@ -100,7 +107,7 @@ def menu():
 		case 16:
 			system('clear')
 			print("\033[0m---Reservas de salas de estudio---\n")
-			db.prompt_delete_contact()
+			
 		case 17:
 			print("\033[0m---Calculo Complejidad tiempo y espacio---\n")
 		case 18: 
@@ -112,6 +119,7 @@ def menu():
 			#print(db["Estudiantes"])
 			for key in keys:
 				print(f"""\n{key}: {db[key]}""")
+			#print(db["Estudiantes"])
 		case _:
 			print("\033[31mIngrese una opción válida")
 
@@ -121,10 +129,11 @@ if __name__ == "__main__":
 	#baseDatos.cargarDBLibros()
 	#Se carga la base de datos de estudiantes
 	#baseDatos.cargarDBEstudiantes()
+	
 	while True:
 		#Limpiamos la pantalla
 		system('clear')
-#		print(os.getenv("REPLIT_DB_URL"))
+		#print(os.getenv("REPLIT_DB_URL"))
 		#llamada a la función menu
 		menu()
 		#solicitamos al usuario que persione cualquier tecla

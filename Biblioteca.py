@@ -1,13 +1,14 @@
-import baseDatos
+import baseDatos,main
 from os import system
-#punto 2
 
+#punto 2
 def catalogo():
-	print("\n[1] Buscar por titulo")
-	print("[2] Buscar por autor")
+	print("\n[1] Buscar por titulo\n[2] Buscar por autor\n[0] Volver al menú")
 	while True:
 	    try:
 	        opcion = int(input("\033[0m\nIngrese una opción: "))
+	        if opcion ==0:
+		        main.regresarmenu()
 	        break
 	    except ValueError:
 	        print("\033[31mEntrada inválida, ingrese solo numeros")
@@ -31,6 +32,8 @@ def reservaLibros(nombre,reserva_o_prestamos):
 	while True:
 	    try:
 	        opcion = int(input("\033[0m\nIngrese el número del libro a reservar: "))
+	        if opcion == 0:
+	            main.regresarmenu()
 	        break
 	    except ValueError:
 	        print("\033[31mEntrada inválida, ingrese solo numeros")
@@ -43,7 +46,10 @@ def reservaLibros(nombre,reserva_o_prestamos):
 		baseDatos.actualizarLibrosReservados(nombre,opcion-1,reserva_o_prestamos)
 	
 def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
-	nombre = input("\033[0mIngrese el nombre y apellido del estudiante: ").lower()
+	baseDatos.listadoEstudiantes()
+	nombre = input("\033[0m> Para volver al menú digite [0]\nIngrese el nombre y apellido del estudiante: ").lower()
+	if int(nombre) == 0:
+		main.regresarmenu()
 	#verificar que ingrese solo letras y se verifica en la base de datos el nombre del estudiante
 	if baseDatos.obtenerEstudiante(nombre):
 	    print("\033[0mEl nombre ingresado es \033[32mcorrecto")

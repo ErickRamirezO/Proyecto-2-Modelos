@@ -15,85 +15,35 @@
 
 
 
-## About The Project
+## Sobre nuestro Software
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+BiblioSolutions es un programa que permite la gestión de una biblioteca mediante el uso de la programación en Python. Este tipo de software ofrece una variedad de funciones, como la adición y eliminación de registros de libros, gestión de préstamos y devoluciones, generación de informes y estadísticas, así como también la capacidad de buscar libros en la base de datos de la biblioteca.
 
-Here's why:
 
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+## Desarrollo 
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
+BiblioSolutions posee una gestión de reservas, un sistema automatizado de recordatorios para préstamos vencidos, y la importación y exportación de datos estadísticos en diferentes formatos. Esto permite a la biblioteca tener un mejor control de sus actividades administrativas. En general, BiblioSolutions es una herramienta completa para quienes buscan tener una mejor gestión para bibliotecas.
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+## Guia de inicio para el Usuario 
 
-## Built With
+* librerías para calculo de la complejidad de espacio y tiempo
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-* npm
-
-```sh
-npm install npm@latest -g
+```py
+pip install memory_profiler
+pip install big_o
 ```
 
-### Installation
+* librería para manejo de base de datos
 
-1. Get a free API Key at [https://example.com](https://example.com)
-
-2. Clone the repo
-
-```sh
-git clone https://github.com/your_username_/Project-Name.git
+```py
+pip install replit
 ```
 
-3. Install NPM packages
 
-```sh
-npm install
-```
+## Uso
 
-4. Enter your API in `config.js`
+BiblioSolutions se plantea ofrecer una variedad de funciones para la gestión de una biblioteca, la generación de informes y estadísticas, y la capacidad de buscar libros como se mencionó anteriormente. También permitir a los usuarios acceder a la información de la biblioteca desde cualquier lugar a través de una interfaz que puede ser usado en computadoras y/o móviles para realizar préstamos o reservas de materiales digitales. Mejorar el control y planificación de la biblioteca mediante la implementación de otras funciones avanzadas al software.
 
-```JS
-const API_KEY = 'ENTER YOUR API';
-```
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-## Contributing
-
-
-
-### Creating A Pull Request
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## Authors
+## Autores
 
 * **https://github.com/ErickRamirezO** - *Programador* - [https://github.com/ErickRamirezO](https://github.com/adalicarvajal) - *Programadora*
-
-## Acknowledgements
-
-* [ErickRamirezO]([https://github.com/ShaanCoding/](https://github.com/ErickRamirezO))
-* [adalicarvajal]([https://github.com/othneildrew/Best-README-Template](https://github.com/adalicarvajal))
-
