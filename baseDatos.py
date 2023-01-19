@@ -29,7 +29,7 @@ def cargarDBEstudiantes():
 	#diccionario estudiantes
 	db["Estudiantes"] = db["Carrera_estudiantes"] = db[
 	 "Numero_libros_reservados"] = db["Numero_libros_prestados"] = db[
-	  "Numero_Visitas_Estudiante"] = db["Notificacion_devolucion"] = []
+	  "Numero_Visitas_Estudiante"] = db["Notificacion_devolucion"] =db["Numero_multas"]= []
 	for i in range(len(Datos.estudiantes)):
 		db["Estudiantes"].append(Datos.estudiantes[i])
 		db["Carrera_estudiantes"].append(Datos.carrera[i])
@@ -40,7 +40,15 @@ def cargarDBEstudiantes():
 		db["Numero_multas"].append(Datos.numero_multas[i])
 	print("\033[32mEstudiantes cargados exitosamente")
 
-
+def cargarSalas():
+	print("Cargando salas...")
+	#diccionario estudiantes
+	db["Salas_de_estudio"] = db["Sala_disponible"]= db["Sala_reservada"]=[]
+	for i in range(len(Datos.salas)):
+		db["Salas_de_estudio"].append(Datos.salas[i])
+		db["Sala_disponible"].append(Datos.sala_disponible[i])
+		db["Sala_reservada"].append(Datos.sala_reservada[i])
+		
 #extra
 def listadoEstudiantes():
 	print("Estudiantes ingresados")
@@ -281,3 +289,17 @@ def obtenerHistorialReservasPrestamos(nombre_estudiante):
 			print(
 			 f"""\nHistorial de {db["Estudiantes"][i]}\n\033[36mLibros Prestados: \033[0m{db["Libros_reservados_"+nombre[0]+"_"+nombre[1]]}\n\033[36mLibros Reservados: \033[0m{db["Libros_prestados_"+nombre[0]+"_"+nombre[1]]}\n\033[36mTotal Prestamos: \033[0m{db["Numero_libros_reservados"][i]}\n\033[36mTotal Reservas: \033[0m{db["Numero_libros_prestados"][i]}"""
 			)
+
+#punto 16
+def mostrarSalas():
+	print("\033[0m{:^8}\033[33m{:^18}\033[32m{:^17}".format(
+	 "Número", "Sala de Estudio", "Disponibilidad"))
+	for i in range(len(db["Salas_de_estudio"])):
+		print("\033[0m{:^8}{:^18}{:^17}".format(i+1, db["Salas_de_estudio"][i], db["Sala_disponible"][i]))
+			
+def disponibilidadSala(numero_sala,numero_estudiante):
+	if db["Sala_disponible"][numero_sala-1] == "Si":
+		db["Sala_disponible"][numero_sala-1] = "No"
+		db["Sala_reservada"][numero_estudiante-1] = db["Salas_de_estudio"][numero_sala-1]
+		return True
+	return False

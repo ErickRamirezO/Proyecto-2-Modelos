@@ -38,7 +38,7 @@ mensajePrincipal = """BiblioSolutions 📚
 10.- Registro de devolución de los libros
 11.- Generar informe de la biblioteca
 12.- Estadísticas sobre el número de visitas a la biblioteca
-13.- Estadísticas del número de libros prestados, el número de multas, etc.
+13.- Estadísticas del número de libros prestados, el número de multas
 14.- Sistema de gestión de la biblioteca
 15.- Historial de préstamos
 16.- Reservas de salas de estudio
@@ -109,7 +109,7 @@ def menu():
 			baseDatos.obtenerVisitasBiblioteca()
 		case 13:
 			system('clear')
-			print("\033[0m---Estadísticas del número de libros prestados, el número de multas, etc.---\n")
+			print("\033[0m---Estadísticas del número de libros prestados, el número de multas---\n")
 			baseDatos.obtenerLibrosPrestados()
 		case 14:
 			system('clear')
@@ -122,7 +122,7 @@ def menu():
 		case 16:
 			system('clear')
 			print("\033[0m---Reservas de salas de estudio---\n")
-			
+			Biblioteca.reservaSala()
 		case 17:
 			print("\033[0m---Calculo Complejidad tiempo y espacio---\n")
 		case 18: 
@@ -141,9 +141,11 @@ def menu():
 
 if __name__ == "__main__":
 	#Se carga la base de datos de libros
-	#baseDatos.cargarDBLibros()
+	baseDatos.cargarDBLibros()
 	#Se carga la base de datos de estudiantes
-	#baseDatos.cargarDBEstudiantes()
+	baseDatos.cargarDBEstudiantes()
+	#se carga las salas
+	baseDatos.cargarSalas()
 	#cargarImagen()
 	cargarLogo()
 	while True:

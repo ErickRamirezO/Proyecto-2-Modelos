@@ -21,13 +21,11 @@ def registro():
 	if opcion == 0:
 		main.regresarmenu()
 	baseDatos.listadoEstudiantes()
-	while True:
-		nombre =input("\nIngrese el nombre y apellido del estudiante nuevo: ")
-		if (re.match("^[a-zA-Z]*$", nombre) and 	validarNombreApellido(nombre)):
-			print("\033[31mNombre inválida, ingrese nombre y apellido")
-			break
-		else:
-			print("Por favor, ingrese solo letras.")
+	nombre =input("\nIngrese el nombre y apellido del estudiante nuevo: ")
+	if (validarNombreApellido(nombre)):
+		print("\033[31mNombre inválida, ingrese nombre y apellido")
+	else:
+		print("Por favor, ingrese solo letras.")
 	carrera = input("\033[0mIngrese la carrera: ")
 	print(f"\nAñadiendo al estudiante {nombre} de la carrera {carrera}")
 	baseDatos.registro_estudiante(nombre,carrera)

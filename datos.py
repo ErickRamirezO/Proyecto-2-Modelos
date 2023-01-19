@@ -51,3 +51,9 @@ numero_multas = [2, 1, 0, 0, 0, 1, 0, 3, 4, 2, 1, 1, 2, 0, 1]
 notificacion_devolucion = [
  "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
 ]
+sala_reservada = ["","","","","","","","","","","","","","","",]
+
+
+#SALAS DE ESTUDIO
+salas = ["A1","A2","B1","B2","C1","C2"]
+sala_disponible = ["Si","Si","No","No","Si","No"]

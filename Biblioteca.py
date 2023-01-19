@@ -1,4 +1,4 @@
-import baseDatos,main
+import baseDatos,main,estudiante
 from os import system
 
 #punto 2
@@ -67,3 +67,40 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    system("clear")
 	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
 		
+#16 salas de estudio
+def reservaSala():
+	print("\n[0] Volver al menú\n[1] Mostrar salas\n")
+	while True:
+	    try:
+	        opcion = int(input("\033[0m\nIngrese una opción: "))
+	        break
+	    except ValueError:
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
+	if opcion ==0:
+		main.regresarmenu()
+	else:
+		baseDatos.mostrarSalas()
+		print("\n\n[0] Volver\n[1] Reservar sala\n")
+		while True:
+		    try:
+		        opcion = int(input("\033[0m\nIngrese una opción: "))
+		        break
+		    except ValueError:
+		        print("\033[31mEntrada inválida, ingrese solo numeros")
+		if opcion ==0:
+			main.regresarmenu()
+		else:
+			system("clear")
+			baseDatos.mostrarSalas()
+			baseDatos.listadoEstudiantes()
+			while True:
+			    try:
+				    numero_sala = int(input("\033[0m\nIngrese el numero de sala: "))
+				    numero_estudiante = int(input("\nIngrese el numero del estudiante: "))
+				    break
+			    except ValueError:
+				        print("\033[31mEntrada inválida, ingrese solo numeros")
+			if baseDatos.disponibilidadSala(numero_sala,numero_estudiante):
+				print("Reserva de la sala fue realizada con éxito")
+			else:
+				print("No se puede reservar esa sala porque no está disponible!")
