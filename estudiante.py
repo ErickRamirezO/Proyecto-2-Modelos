@@ -2,6 +2,13 @@ import baseDatos, main,re
 from os import system
 #validacion nombre y apellido
 def validarNombreApellido(text):
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	nombre = text.split()
 	if len(nombre) == 2:
 		return True
@@ -11,6 +18,13 @@ def validarNombreApellido(text):
 #punto 1 
 	#Usar función split para validar qhe ingrese nombre y apellido 
 def registro():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	while True:
 	    try:
 	        opcion = int(input("[0] Volver al menú\n[1] Ver lista de usuarios\nIngrese una opción: "))
@@ -33,6 +47,13 @@ def registro():
 #punto 5 
 #NOTA: ARREGALR LOS COLORES
 def notificacion():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	while True:
 		try:
 			opcion = int(input("[0] Volver al menú\n[1] Ver lista de usuarios con reserva\n[2] Ver notificacion enviadas\nIngrese una opción: "))
@@ -58,6 +79,13 @@ def notificacion():
 
 #punto 15
 def historialPrestamosReservas():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	while True:
 		nombre =input("\nIngrese el nombre y apellido del estudiante nuevo: ").lower()
 		if (re.match("^[a-zA-Z]*$", nombre) and validarNombreApellido(nombre)):

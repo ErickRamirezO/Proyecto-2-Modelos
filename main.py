@@ -6,6 +6,13 @@ import os,estudiante,Biblioteca,baseDatos,time
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQyMDIzODQsImlhdCI6MTY3NDA5MDc4NCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.0AECGjcAlygu1w-9wOyuqOXav5BjfLZg67FdeQua-k84gywG6RwxGAsSmSk7d0o4AvHquo_H2hdo3SexlW6z0Q")
 
 def cargarImagen():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	ImageToAscii(imagePath="libro.png",witdh=100,outputFile="output.txt")
 	fichero = open('output.txt')
 	print(fichero.read())
@@ -13,6 +20,13 @@ def cargarImagen():
 	system("clear")
 
 def cargarLogo():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	print("*************BiblioSolution*************")
 	fichero = open('output.txt')
 	print(fichero.read())
@@ -20,6 +34,13 @@ def cargarLogo():
 	system("clear")
 	
 def regresarmenu():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	system("clear")
 	menu()
 	
@@ -48,6 +69,13 @@ mensajePrincipal = """BiblioSolutions 📚
 """
 
 def menu():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	print(f"\033[36m{mensajePrincipal}")
 	while True:
 	    try:
@@ -98,11 +126,11 @@ def menu():
 		case 10:
 			system('clear')
 			print("\033[0m---Registro de devolución de los libros---\n")
-			
+			Biblioteca.registroDevolucionLibros()
 		case 11:
 			system('clear')
 			print("\033[0m---Generar informe de la biblioteca---\n")
-			
+			Biblioteca.generarInforme()
 		case 12:
 			system('clear')
 			print("\033[0m---Estadísticas sobre el número de visitas a la biblioteca---\n\n")
@@ -126,7 +154,7 @@ def menu():
 		case 17:
 			print("\033[0m---Calculo Complejidad tiempo y espacio---\n")
 		case 18: 
-			print(f"\033[36mGracias... ¡Vuelve pronto!")
+			print("\033[36mGracias... ¡Vuelve pronto!")
 			exit()
 		case 19:
 			print("Datos\n")
@@ -141,11 +169,11 @@ def menu():
 
 if __name__ == "__main__":
 	#Se carga la base de datos de libros
-	baseDatos.cargarDBLibros()
+	#baseDatos.cargarDBLibros()
 	#Se carga la base de datos de estudiantes
-	baseDatos.cargarDBEstudiantes()
+	#baseDatos.cargarDBEstudiantes()
 	#se carga las salas
-	baseDatos.cargarSalas()
+	#baseDatos.cargarSalas()
 	#cargarImagen()
 	cargarLogo()
 	while True:

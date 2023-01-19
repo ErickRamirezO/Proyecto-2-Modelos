@@ -3,6 +3,13 @@ from os import system
 
 #punto 2
 def catalogo():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	print("\n[1] Buscar por titulo\n[2] Buscar por autor\n[0] Volver al menú")
 	while True:
 	    try:
@@ -28,6 +35,13 @@ def catalogo():
 
 #punto 3
 def reservaLibros(nombre,reserva_o_prestamos):
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	baseDatos.obtenerLibros()
 	while True:
 	    try:
@@ -46,12 +60,19 @@ def reservaLibros(nombre,reserva_o_prestamos):
 		baseDatos.actualizarLibrosReservados(nombre,opcion-1,reserva_o_prestamos)
 	
 def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
 	baseDatos.listadoEstudiantes()
 	nombre = input("\033[0m> Para volver al menú digite [0]\nIngrese el nombre y apellido del estudiante: ").lower()
 	if int(nombre) == 0:
 		main.regresarmenu()
 	#verificar que ingrese solo letras y se verifica en la base de datos el nombre del estudiante
-	if baseDatos.obtenerEstudiante(nombre):
+	if baseDatos.validarEstudiante(nombre):
 	    print("\033[0mEl nombre ingresado es \033[32mcorrecto")
 		# Se verifica que no tenga más de 3 libros reservados
 	    if baseDatos.validarNumeroReservaLibros(nombre)<3: 
@@ -66,9 +87,57 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    input("\n\033[0mPresione una tecla para continuar... ")
 	    system("clear")
 	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
+
+#punto10
+def registroDevolucionLibros():
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
+	print("\n[0] Volver al menú\n[1] Mostrar listado estudiantes\n")
+	while True:
+	    try:
+	        opcion = int(input("\033[0m\nIngrese una opción: "))
+	        break
+	    except ValueError:
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
+	if opcion ==0:
+		main.regresarmenu()
+	else:
+		baseDatos.listadoEstudiantes()
+		while True:
+		    try:
+		        numero_estudiante = int(input("\033[0m\nIngrese el numero del estudiante: "))
+		        break
+		    except ValueError:
+		        print("\033[31mEntrada inválida, ingrese solo numeros")
+
+		if baseDatos.registroDevolucionLibros(numero_estudiante):
+			print("El registro de devolucion del libro fue realizado con éxito")
+		else:
+			print("El alumno no tiene un préstamo activo")
 		
+
+def generarInforme():
+	print("\n[0] Volver al menú\n[1] Generar informe\n")
+	while True:
+	    try:
+	        opcion = int(input("\033[0m\nIngrese una opción: "))
+	        break
+	    except ValueError:
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
+	if opcion ==0:
+		main.regresarmenu()
+	else:
+		baseDatos.mostrarInforme()
 #16 salas de estudio
 def reservaSala():
+	"""
+ 
+ 	"""
 	print("\n[0] Volver al menú\n[1] Mostrar salas\n")
 	while True:
 	    try:

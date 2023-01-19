@@ -48,10 +48,9 @@ numero_libros_reservados = [3, 1, 0, 3, 2, 0, 1, 0, 2, 1, 2, 0, 2, 3, 0]
 numero_libros_prestados = [10, 13, 0, 2, 2, 5, 6, 4, 7, 9, 11, 3, 12, 0, 1]
 numero_visitas_estudiante = [4, 3, 0, 1, 5, 1, 0, 3, 4, 4, 0, 2, 2, 1, 1]
 numero_multas = [2, 1, 0, 0, 0, 1, 0, 3, 4, 2, 1, 1, 2, 0, 1]
-notificacion_devolucion = [
- "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
-]
-sala_reservada = ["","","","","","","","","","","","","","","",]
+prestamo_activo = ["Si","Si","No","Si","No","No","No","No","Si","No","Si","No","Si","Si","No"]
+notificacion_devolucion = [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+sala_reservada = ["","","","","","","","","","","","","","",""]
 
 
 #SALAS DE ESTUDIO
