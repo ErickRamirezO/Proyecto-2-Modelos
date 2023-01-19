@@ -1,9 +1,24 @@
+from image_to_ascii import ImageToAscii
 from replit import Database
 from os import system
-import os,estudiante,Biblioteca,baseDatos
+import os,estudiante,Biblioteca,baseDatos,time
 
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQyMDIzODQsImlhdCI6MTY3NDA5MDc4NCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.0AECGjcAlygu1w-9wOyuqOXav5BjfLZg67FdeQua-k84gywG6RwxGAsSmSk7d0o4AvHquo_H2hdo3SexlW6z0Q")
 
+def cargarImagen():
+	ImageToAscii(imagePath="libro.png",witdh=100,outputFile="output.txt")
+	fichero = open('output.txt')
+	print(fichero.read())
+	time.sleep(5)
+	system("clear")
+
+def cargarLogo():
+	print("*************BiblioSolution*************")
+	fichero = open('output.txt')
+	print(fichero.read())
+	time.sleep(5)
+	system("clear")
+	
 def regresarmenu():
 	system("clear")
 	menu()
@@ -95,7 +110,7 @@ def menu():
 		case 13:
 			system('clear')
 			print("\033[0m---Estadísticas del número de libros prestados, el número de multas, etc.---\n")
-			
+			baseDatos.obtenerLibrosPrestados()
 		case 14:
 			system('clear')
 			print("\033[0m---Sistema de gestión de la biblioteca---\n")
@@ -129,7 +144,8 @@ if __name__ == "__main__":
 	#baseDatos.cargarDBLibros()
 	#Se carga la base de datos de estudiantes
 	#baseDatos.cargarDBEstudiantes()
-	
+	#cargarImagen()
+	cargarLogo()
 	while True:
 		#Limpiamos la pantalla
 		system('clear')
