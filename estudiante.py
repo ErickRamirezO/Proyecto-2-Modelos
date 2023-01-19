@@ -32,10 +32,31 @@ def registro():
 	print(f"\nAñadiendo al estudiante {nombre} de la carrera {carrera}")
 	baseDatos.registro_estudiante(nombre,carrera)
 
-#punto 5
+#punto 5 
+#NOTA: ARREGALR LOS COLORES
 def notificacion():
-	baseDatos.listadoEstudiantesReserva()
-	
+	while True:
+		try:
+			opcion = int(input("[0] Volver al menú\n[1] Ver lista de usuarios con reserva\n[2] Ver notificacion enviadas\nIngrese una opción: "))
+			break
+		except ValueError:
+			print("Por favor, ingrese solo números.")
+			system("clear")
+	if opcion == 0:
+		main.regresarmenu()
+	if opcion == 1:
+		baseDatos.listadoEstudiantesReserva()
+		while True:
+			try:
+				numero = int(input("\nIngrese el número del estudiante para notificarle: "))
+				break
+			except ValueError:
+				print("Por favor, ingrese solo números.")
+				system("clear")
+		baseDatos.notificarUsuario(numero)
+	else:
+		baseDatos.listadoEstudiantesNotificados()
+		
 
 #punto 15
 def historialPrestamosReservas():

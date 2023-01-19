@@ -20,13 +20,14 @@ def cargarDBLibros():
 def cargarDBEstudiantes():
 	print("Cargando base de datos de estudiantes...")
 		#diccionario estudiantes
-	db["Estudiantes"]=db["Carrera_estudiantes"]=db["Numero_libros_reservados"]=db["Numero_libros_prestados"]=db["Numero_Visitas_Estudiante"]=[]
+	db["Estudiantes"]=db["Carrera_estudiantes"]=db["Numero_libros_reservados"]=db["Numero_libros_prestados"]=db["Numero_Visitas_Estudiante"]=db["Notificacion_devolucion"]=[]
 	for i in range(len(Datos.estudiantes)):
 		db["Estudiantes"].append(Datos.estudiantes[i])
 		db["Carrera_estudiantes"].append(Datos.carrera[i])
 		db["Numero_libros_reservados"].append(Datos.numero_libros_reservados[i])
 		db["Numero_libros_prestados"].append(Datos.numero_libros_prestados[i])
 		db["Numero_Visitas_Estudiante"].append(Datos.numero_visitas_estudiante[i])
+		db["Notificacion_devolucion"].append(Datos.notificacion_devolucion[i])
 	print("\033[32mEstudiantes cargados exitosamente")
 
 #extra
@@ -41,7 +42,7 @@ def listadoEstudiantes():
 def listadoEstudiantesReserva():
 	print("Estudiantes ingresados")
 	print("----------------------")
-	print("Los estudiantes que tienen reservados libros se marcan de color verde")
+	print("Los estudiantes que tienen reservados libros se marcan de color \033[32mverde")
 	print("\033[0m{:^8}\033[33m{:^20}\033[35m{:^25}\033[31m{:^25}".format("Número","Estudiante","Carrera","Libros reservados"))
 	for i in range(len(db["Estudiantes"])):
 		if db["Numero_libros_reservados"][i] > 0:
@@ -99,7 +100,37 @@ def actualizarLibrosReservados(nombre_estudiante,numeroLibroReservar,reserva_o_p
 				db["Libros_prestados_"+nombre[0]+"_"+nombre[1]].append(db["Titulos_libros"][numeroLibroReservar])
 				print("\033[32m ¡Ejemplar prestado con éxito!")
 #fin punto 3 y 4
-			
+
+#Punto 5 
+def listadoEstudiantesNotificados():
+	print("\033[32m{:^8}{:^20}{:^25}{:^60}".format("Número","Estudiante","Carrera","Notificación"))
+	for i in range(len(db["Estudiantes"])):
+		if db["Notificacion_devolucion"][i] != "":
+			print("\033[32m{:^8}{:^20}{:^25}{:^60}".format(i+1,db["Estudiantes"][i],db["Carrera_estudiantes"][i],db["Notificacion_devolucion"][i]))
+
+def notificarUsuario(numero_estudiante):
+	if db["Numero_libros_reservados"][numero_estudiante-1] >0:
+		total_libros = db["Numero_libros_reservados"][numero_estudiante-1]
+		nombre_estudiante = db["Estudiantes"][numero_estudiante-1]
+		db["Notificacion_devolucion"][numero_estudiante-1] = "¡Aviso! Tiene "+str(total_libros)+" libros pendientes por devolver"
+		print(f"\033[32m Se ha notificado satisfactoriamente al estudiante \033[0m{nombre_estudiante}")
+	else:
+		print("No se puede enviar la notificación al estudiante "+db["Estudiantes"][numero_estudiante-1]+" porque no tiene reservado ningún libro")
+		input("Presione cualquier tecla para escoger otro estudiante")
+		system("clear")
+		print("---Notificaciones---")
+		print("Los estudiantes que tienen reservados libros se marcan de color \033[32mverde")
+		listadoEstudiantesReserva()
+		while True:
+			try:
+				numero = int(input("\nIngrese el número del estudiante para notificarle: "))
+				break
+			except ValueError:
+				print("Por favor, ingrese solo números.")
+				system("clear")
+		notificarUsuario(numero)
+
+				
 #punto 6
 def seguimientoLibros():
 	print("\033[33m{:^40}{:^28}{:^14}{:^18}{:^40}{:^14}".format("Libros","Autor","Disponibilidad","Número de copias","Ubicacion","Conservación"))
