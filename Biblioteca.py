@@ -88,6 +88,15 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    system("clear")
 	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
 
+
+#punto 8
+def sistemaMultas():
+	pass
+
+#punto 9
+def serviciosEnLinea():
+	pass
+		
 #punto10
 def registroDevolucionLibros():
 	"""
@@ -133,6 +142,11 @@ def generarInforme():
 		main.regresarmenu()
 	else:
 		baseDatos.mostrarInforme()
+
+#punto 14
+def gestionBiblioteca():
+	pass
+		
 #16 salas de estudio
 def reservaSala():
 	"""

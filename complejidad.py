@@ -1,4 +1,6 @@
-mensajePrincipal = """Seleccione la opción para calcular la complejidad
+import main
+from os import system
+mensajePrincipal = """
 ----------------------------------
 1 - Registrar un estudiante por carrera
 2 - Catálogo: buscar y encontrar libros, revistas, tesis, etc.
@@ -22,4 +24,39 @@ mensajePrincipal = """Seleccione la opción para calcular la complejidad
 """
 
 def inicio():
-	print("")
+	"""
+  Funcion:
+
+ Parametros:
+
+ Retorna:
+ 	"""
+	system("clear")
+	print("\033[0m[O] Volver al menú principal \n[1] Calcular complejidad tiempo\n[2] Calcular Complejidad espacio")
+	while True:
+	    try:
+	        opcion = int(input("\033[0m\nSeleccione la opción para calcular la complejidad: "))
+	        break
+	    except ValueError:
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
+	if opcion == 0:
+		main.regresarmenu()
+	elif opcion == 1:
+		print("\033[0mCalculo Complejidad de Tiempo")
+		print(f"\033[36m{mensajePrincipal}")
+		while True:
+		    try:
+		        opcion = int(input("\033[0m\nSeleccione la opción para calcular la complejidad de tiempo: "))
+		        break
+		    except ValueError:
+		        print("\033[31mEntrada inválida, ingrese solo numeros")
+	else: 
+		print("\033[0mCalculo Complejidad de Espacio")
+		print(f"\033[36m{mensajePrincipal}")
+		while True:
+		    try:
+		        opcion = int(input("\033[0m\nSeleccione la opción para calcular la complejidad de espacio: "))
+		        break
+		    except ValueError:
+		        print("\033[31mEntrada inválida, ingrese solo numeros")
+		

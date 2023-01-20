@@ -479,8 +479,6 @@ def mostrarInforme():
 	print("\033[33m{:^20}{:^20}{:^20}{:^10}{:^26}".format("Total", total_libros_reservados,total_libros_prestados,total_multas,total_visitas))
 			
 #punto 12
-#Qué estudiante visitó más y menos la biblioteca
-#visita promedio a la biblioteca
 def obtenerVisitasBiblioteca():
 	"""
   Funcion:
@@ -530,7 +528,10 @@ def obtenerLibrosPrestados():
 	graficas.title("Gráfica estudiantes y numero de multas")
 	graficas.show()
 
-
+#punto 14
+def gestionBiblioteca():
+	pass
+	
 #punto 15
 def obtenerHistorialReservasPrestamos(nombre_estudiante):
 	"""

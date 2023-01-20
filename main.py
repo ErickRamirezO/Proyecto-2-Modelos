@@ -1,7 +1,7 @@
 from image_to_ascii import ImageToAscii
 from replit import Database
 from os import system
-import os,estudiante,Biblioteca,baseDatos,time
+import os,estudiante,Biblioteca,baseDatos,time,complejidad
 
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQyMDIzODQsImlhdCI6MTY3NDA5MDc4NCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.0AECGjcAlygu1w-9wOyuqOXav5BjfLZg67FdeQua-k84gywG6RwxGAsSmSk7d0o4AvHquo_H2hdo3SexlW6z0Q")
 
@@ -118,11 +118,11 @@ def menu():
 		case 8:
 			system('clear')
 			print("\033[0m---Sistema de multas---\n")
-			
+			Biblioteca.sistemaMultas()
 		case 9:
 			system('clear')
 			print("\033[0m---Servicios en línea---\n")
-			
+			Biblioteca.serviciosEnLinea()
 		case 10:
 			system('clear')
 			print("\033[0m---Registro de devolución de los libros---\n")
@@ -153,6 +153,7 @@ def menu():
 			Biblioteca.reservaSala()
 		case 17:
 			print("\033[0m---Calculo Complejidad tiempo y espacio---\n")
+			complejidad.inicio()
 		case 18: 
 			print("\033[36mGracias... ¡Vuelve pronto!")
 			exit()
