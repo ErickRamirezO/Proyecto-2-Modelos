@@ -203,7 +203,7 @@ def menu():
       #opcion de las multas 
 			print("\033[0m---Sistema de multas---\n")
       #llamamos a la funcion de sistema de multas 
-			Biblioteca.sistemaMultas()
+			baseDatos.sistemaMulta()
     #noveno caso 
 		case 9:
       #limpia la pantalla
@@ -301,9 +301,9 @@ if __name__ == "__main__":
 	#se carga las salas
 	#baseDatos.cargarSalas()
 	#se carga el personal
-	baseDatos.cargarPersonal()
+	#baseDatos.cargarPersonal()
 	#cargarImagen()
-	cargarLogo()
+	#cargarLogo()
 	while True:
 		#Limpiamos la pantalla
 		system('clear')

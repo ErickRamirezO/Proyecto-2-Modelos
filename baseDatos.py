@@ -4,6 +4,7 @@ import big_o, main
 import datos as Datos
 from os import system
 import matplotlib.pyplot as graficas
+from datetime import date
 
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ0NjY0MDYsImlhdCI6MTY3NDM1NDgwNiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.CKcTKIU9y90DWPlsoAK1dAaX5sL4RcqLxU9TdgDhErquYi_j7R_i4aviCtUAEi3WHibUbEhXw123MLi25_q2Hw")
 
@@ -55,7 +56,7 @@ def cargarDBEstudiantes():
 	#lista estudiantes
 	db["Estudiantes"] = db["Carrera_estudiantes"] = db[
 	 "Numero_libros_reservados"] = db["Numero_libros_prestados"] = db[
-	  "Numero_Visitas_Estudiante"] = db["Notificacion_devolucion"] =db["Numero_multas"]=db["Prestamo_activo"]= db["Registro_devolucion"]=[]
+	  "Numero_Visitas_Estudiante"] = db["Notificacion_devolucion"] =db["Numero_multas"]=db["Prestamo_activo"]= db["Registro_devolucion"]=db["Dia_reserva"]=db["Dia_devolucion"]=[]
   #agrega los datos correspondientes a cada una de las categorías a partir de los datos contenidos en una clase llamada "Datos"
 	for i in range(len(Datos.estudiantes)):
     #datos correspondientes a cada una de las categorías
@@ -74,6 +75,10 @@ def cargarDBEstudiantes():
 		db["Numero_multas"].append(Datos.numero_multas[i])
 	 #datos correspondientes a cada una de las categorías
 		db["Prestamo_activo"].append(Datos.prestamo_activo[i])
+	#datos correspondientes a cada una de las categorías
+		db["Dia_reserva"].append(Datos.dia_reserva[i])
+		#datos correspondientes a cada una de las categorías
+		db["Dia_devolucion"].append(Datos.dia_devolucion[i])
 	  #datos correspondientes a cada una de las categorías
   #Finalmente, imprime un mensaje indicando que los estudiantes se han cargado exitosamente.
 	print("\033[32mEstudiantes cargados exitosamente")
@@ -291,6 +296,11 @@ def actualizarLibrosReservados(lista):
 	reserva_o_prestamo = lista[2]
   #divide el nombre del estudiante en dos partes, el primer y segundo nombre.
 	nombre = nombre_estudiante.split()
+	# Obtener el objeto de fecha actual
+	fecha_actual = date.today()
+	# Obtener el número del día actual
+	dia_actual = fecha_actual.day
+	#Se añade el dia de devolucion a la base de datos
   #crean listas vacías en la base de datos para almacenar los libros reservados y prestados por el estudiante
 	db["Libros_reservados_" + nombre[0] + "_" +
 	   nombre[1]] = db["Libros_prestados_" + nombre[0] + "_" + nombre[1]] = []
@@ -304,6 +314,7 @@ def actualizarLibrosReservados(lista):
 				db["Numero_libros_reservados"][i] = db["Numero_libros_reservados"][i] + 1
 				db["Libros_reservados_" + nombre[0] + "_" + nombre[1]].append(
 				db["Titulos_libros"][numeroLibroReservar])
+				db["Dia_reserva"][i] = dia_actual
         #mensaje de que el ejemplejar se reservo con exito 
 				return "\033[32m ¡Ejemplar reservado con éxito!"
       #En caso de ser 2, se aumenta en 1 el número de libros prestados del estudiante y se agrega el título del libro prestado a la lista de libros
@@ -394,7 +405,7 @@ def notificarUsuario(numero_estudiante):
 		notificarUsuario(numero)
 
 
-def seguimientoLibros():
+def  seguimientoLibros():
 	"""
   Funcion: imprime los encabezados de diferentes campos de los libros
 
@@ -500,10 +511,34 @@ def actualizarUsuario():
 			                                        db["Carrera_estudiantes"][i]))
 
 
+#punto 8
+def sistemaMulta():
+	"""
+  Funcion: La función "sistemaMulta()" calcula la multa correspondiente de un estudiante primero verificando que tiene un préstamo activo al igual que el dia en que fue reservado el libro
 
+ Parametros: ninguno
+
+ Retorna: No retorna ningún valor
+ 	"""
+	#Esta línea inicia un bucle "for" que iterará a través del rango de la longitud del campo "Estudiantes" en el diccionario "db".
+	for i in range(len(db["Estudiantes"])):
+		#Se verifica si el dia de devolucion es diferente de 0 y ademas tiene un préstamo
+		#activo eso quiere decir que no tiene registrado su devolución, entonces...
+		if db["Dia_devolucion"][i] > 0 and db["Prestamo_activo"][i]== "Si":
+			# Obtener el objeto de fecha actual
+			fecha_actual = date.today()
+		# Obtener el número del día actual
+			dias = abs(db["Dia_reserva"][i]-fecha_actual.day)
+		#imprimos al estudiante actual con la multa correspondiente
+			print(f"""\033[32mEl estudiante {db["Estudiantes"][i]} tiene una multa de: ${2.5*dias}""")
+		else:
+		#Imprimimos que el estudainte actual no tiene ninguna multa
+			print(f"""\033[0mEl estudiante {db["Estudiantes"][i]} no tiene multa""")
+			
+#punto 10
 def registroDevolucionLibros(numero_estudiante):
 	"""
-  Funcion: La función "registroDevolucionLibros()" verifica si un estudiante tiene un préstamo activo, en caso de tenerlo
+  Funcion: La función "registroDevolucionLibros()" verifica si un estudiante tiene un préstamo activo, en caso de tenerlo se registra la devolución del libro
 
  Parametros: numero_estudiante
 
@@ -515,6 +550,12 @@ def registroDevolucionLibros(numero_estudiante):
 		db["Numero_libros_reservados"][numero_estudiante-1] -= 1
     #Se agrega el nombre del estudiante en el campo "Registro_devolucion" del diccionario "db"
 		db["Registro_devolucion"].append((db["Estudiantes"][numero_estudiante-1]))
+	# Obtener el objeto de fecha actual
+		fecha_actual = date.today()
+	# Obtener el número del día actual
+		dia_actual = fecha_actual.day
+	#Se añade el dia de devolucion a la base de datos
+		db["Dia_devolucion"][numero_estudiante-1] = dia_actual
     #Se retorna verdadero
 		return True
   #Si no se cumple la condición del if, se retorna falso.

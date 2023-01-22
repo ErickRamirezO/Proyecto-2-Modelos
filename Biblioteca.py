@@ -129,10 +129,6 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
 
 
-#punto 8
-def sistemaMultas():
-	pass
-
 #punto 9
 def serviciosEnLinea():
 	pass
