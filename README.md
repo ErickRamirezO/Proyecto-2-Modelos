@@ -24,20 +24,32 @@ BiblioSolutions es un programa que permite la gestión de una biblioteca mediant
 
 BiblioSolutions posee una gestión de reservas, un sistema automatizado de recordatorios para préstamos vencidos, y la importación y exportación de datos estadísticos en diferentes formatos. Esto permite a la biblioteca tener un mejor control de sus actividades administrativas. En general, BiblioSolutions es una herramienta completa para quienes buscan tener una mejor gestión para bibliotecas.
 
-## Guia de inicio para el Usuario 
+## Librerías Necesarias 
 
-* librerías para calculo de la complejidad de espacio y tiempo
+Este software usa librerias para el control de la consola, cálculo de complejidad de tiempo y espacio, generación de gráficos estadísticos y base de datos.
+
+* librerías para calculo de la complejidad de espacio y tiempo.
 
 ```py
 pip install memory_profiler
 pip install big_o
 ```
 
-* librería para manejo de base de datos
+* Librería para manejo de base de datos de replit
 
 ```py
 pip install replit
 ```
+
+* Librería para generación de gráficos estadísticos se usó Matplotlib
+```py
+pip install matplotlib
+```
+* Librería para convertir una imagen a ASCII Art
+```py
+pip install image-to-Ascii
+```
+
 
 
 ## Uso
@@ -46,4 +58,4 @@ BiblioSolutions se plantea ofrecer una variedad de funciones para la gestión de
 
 ## Autores
 
-* **https://github.com/ErickRamirezO** - *Programador* - [https://github.com/ErickRamirezO](https://github.com/adalicarvajal) - *Programadora*
+* **https://github.com/ErickRamirezO** - *Programador* - - *Programadora* - **https://github.com/adalicarvajal**

@@ -1,4 +1,4 @@
-import main, baseDatos, random 
+import main, baseDatos
 from os import system
 from replit import Database
 
