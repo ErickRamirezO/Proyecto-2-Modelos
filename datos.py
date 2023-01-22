@@ -56,3 +56,9 @@ sala_reservada = ["","","","","","","","","","","","","","",""]
 #SALAS DE ESTUDIO
 salas = ["A1","A2","B1","B2","C1","C2"]
 sala_disponible = ["Si","Si","No","No","Si","No"]
+
+#Personal de la biblioteca
+personal = ["Emily Rodriguez","Michael Martinez","Sarah Perez","David Jackson","Jessica Hernandez","John Moore","Taylor Benavidez"]
+salarios = ["703","686","721","749","744","731","689"]
+cargo = ["Bibliotecario","Bibliotecario","Auxiliar de biblioteca","Auxiliar de biblioteca","Atención al cliente","Informático","Administrativo"]
+jornada_laboral = ["Completo","Parcial","Completo","Parcial","Nocturna","Completo","Parcial"]

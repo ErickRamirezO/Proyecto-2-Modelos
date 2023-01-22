@@ -7,7 +7,7 @@
   <h3 align="center">BiblioSolution</h3>
 
   <p align="center">
-    Una biblioteca es un tesoro a descubrir y a conquistar al alcanse de tu mano 
+    Una biblioteca es un tesoro a descubrir y a conquistar al alcance de tu mano 
     <br/>
     <br/>
   </p>

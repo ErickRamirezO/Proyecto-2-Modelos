@@ -3,36 +3,69 @@ from replit import Database
 from os import system
 import os,estudiante,Biblioteca,baseDatos,time,complejidad
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQyMDIzODQsImlhdCI6MTY3NDA5MDc4NCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.0AECGjcAlygu1w-9wOyuqOXav5BjfLZg67FdeQua-k84gywG6RwxGAsSmSk7d0o4AvHquo_H2hdo3SexlW6z0Q")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQzNTUxMzgsImlhdCI6MTY3NDI0MzUzOCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.Qxym_jKldgyCkfJuq3jzWAGbz5Jz4s4uq_HI1gg5MsMhB6jGznatCpR-0C3s2ZPSLCDbfaJ0EigHdXKXgv4eiQ")
 
 def cargarImagen():
 	"""
-  Funcion:
+  Funcion: La funcion carga una imagen 
 
- Parametros:
-
- Retorna:
+ Parametros: No, contiene parametros 
+ 
+ Retorna: No, retorna ningun dato
  	"""
+  #sta linea utiliza la funcion "ImageToAscii" para convertir una imagen especificada en el parametro "imagePath" con ancho especificado en "width" y guarda el resultado en un archivo de texto especificado en "outputFile"
 	ImageToAscii(imagePath="libro.png",witdh=100,outputFile="output.txt")
+  #abre el archivo de texto creado en el paso anterior
 	fichero = open('output.txt')
+  # imprime el contenido del archivo de texto
 	print(fichero.read())
+  # detiene la ejecución del codigo por 5 segundos
 	time.sleep(5)
+  #limpia la pantalla del terminal
 	system("clear")
 
 def cargarLogo():
 	"""
-  Funcion:
+  Funcion: La funcion nos va a mostrar un catalogo del software 
 
- Parametros:
+ Parametros: No, contiene ningun parametro 
 
- Retorna:
+ Retorna: No, retorna ningun dato
  	"""
+  #La primera línea imprime un título "BiblioSolution" en consola.
 	print("*************BiblioSolution*************")
+  #La segunda línea abre un archivo llamado 'output.txt' y lo asigna a la variable fichero.
 	fichero = open('output.txt')
+  #La tercera línea imprime el contenido del archivo 'output.txt' en consola.
 	print(fichero.read())
+  #detiene la ejecución del programa por 5 segundos.
 	time.sleep(5)
+  # línea limpia la consola.
 	system("clear")
-	
+  #llama a una función llamada "textoInicio()"
+	textoInicio()
+  #espera una entrada del usuario para continuar.
+	input("\nPresione una tecla para continuar")
+  #limpia la consola de nuevo.
+	system("clear")
+
+def textoInicio():
+	"""
+  Funcion: La función textoInicio() imprime en consola un texto de introducción sobre el programa
+ 
+ Parametros: No, contine ningun parametro
+
+ Retorna: No, retorna ningun tipo de dato
+ 	"""
+  #imprime una introduccicon del programa 
+	texto = """BiblioSolutions\n
+ Es un programa que permite la gestión de una biblioteca desarrollado\n100% en Python. Este tipo de software ofrece una variedad de funciones como:\n> la adición y eliminación de registros de libros\n> Gestión de préstamos y devoluciones\n> Generación de informes\n> Estadísticas\n> Busqueda de libros en la base de datos de la biblioteca.\n"""
+  #Utiliza un bucle para imprimir cada letra del texto de forma individual
+	for letra in texto:
+	    print(letra, end="", flush=True)
+    #retraso de 0.01 segundos entre cada impresión
+	    time.sleep(0.01)
+		
 def regresarmenu():
 	"""
   Funcion:
@@ -60,7 +93,7 @@ mensajePrincipal = """BiblioSolutions 📚
 11.- Generar informe de la biblioteca
 12.- Estadísticas sobre el número de visitas a la biblioteca
 13.- Estadísticas del número de libros prestados, el número de multas
-14.- Sistema de gestión de la biblioteca
+14.- Sistema de gestión de personal de la biblioteca
 15.- Historial de préstamos
 16.- Reservas de salas de estudio
 17.- Calculo Complejidad de tiempo y espacio 
@@ -70,94 +103,174 @@ mensajePrincipal = """BiblioSolutions 📚
 
 def menu():
 	"""
-  Funcion:
+  Funcion: L afuncion menu, nos mostrara en pantalla todos los procesos que tiene el software 
 
- Parametros:
+ Parametros: No, contiene ningun parametro
 
- Retorna:
+ Retorna: No, retorna ningun dato 
  	"""
 	print(f"\033[36m{mensajePrincipal}")
+  #el bucle while para que el usuario ingrese la opcion correcta
 	while True:
 	    try:
+        #mensaje de ingreso de opcion
 	        opcion = int(input("\033[0mIngrese una opción: "))
 	        break
+        # si la opcion ingresada por el usuario es incorrecta nos mostara un error 
 	    except ValueError:
+        #mensaje que pide al usuario que ingrese de nuevo la opcion correcta
 	        print("\033[31mEntrada inválida, ingrese solo numeros")
+        #limpia la pantalla
 	        system("clear")
+        # muestra el menu de opciones 
 	        menu()
+        
 	match opcion:
+  #primer caso 
 		case 1:
+      #limpia la pantalla 
 			system('clear')
+      # mensaje del registro de estudiante 
 			print("\033[0m---Registro estudiante---\n")
+      # se guarda en la funcion de registro de estudiante 
 			estudiante.registro()
+    #segundo caso 
 		case 2:
+      #limpia la pantalla 
 			system('clear')
+      # mensaje del catalago de la biblioteca 
 			print("\033[0m---Catálogo BiblioSolutions---\n")
+      # se guarda en la funcion de catalogo 
 			Biblioteca.catalogo()
+    # tercer caso 
 		case 3:
+      #limpia l pantalla 
 			system('clear')
+      #mensaje de reserva de libros 
 			print("\033[0m---Reserva de libros---\n")
+      #se guarda en la funcion de ingresoDatosParaReservarOPrestamoLibro
 			Biblioteca.ingresoDatosParaReservaOPrestamoLibro(1)
+    #cuarto caso 
 		case 4:
+      #limopiar pantalla 
 			system('clear')
+      #muestra la opcion de prestamo del libro
 			print("\033[0m---Prestamo de libros---\n")
+      #llama  a la funcion 
 			Biblioteca.ingresoDatosParaReservaOPrestamoLibro(2)
+    #quinto caso
 		case 5:
+      #limpia la pantalla
 			system('clear')
+      #mensaje de notificacion
 			print("\033[0m---Notificaciones---\n")
+      #mensaje de que se envio la notificacion a los usurarios 
 			print(">Se han enviado notificaciones a los siguientes usuarios")
+      #llamamos a la funcion de notificacion
 			estudiante.notificacion()
+    #sexto caso 
 		case 6:
+      #limpia la pantalla 
 			system('clear')
+      #muestra la opcion del siguimiento de libros
 			print("\033[0m---Seguimiento libros---\n")
+      #llamamos a la funcion de seguimiento de libros 
 			baseDatos.seguimientoLibros()
+    #septimo caso
 		case 7:
+      #limpia la panatalla
 			system('clear')
+      #opcion de gestion de usuarios 
 			print("\033[0m---Gestión de usuarios---\n")
+      #llamamos a la funcion de actualizar usuario 
 			baseDatos.actualizarUsuario()
+    #octavo caso
 		case 8:
+      #limpiamos la pantalla
 			system('clear')
+      #opcion de las multas 
 			print("\033[0m---Sistema de multas---\n")
+      #llamamos a la funcion de sistema de multas 
 			Biblioteca.sistemaMultas()
+    #noveno caso 
 		case 9:
+      #limpia la pantalla
 			system('clear')
+      #opcion del servicio en linea de la Biblioteca
 			print("\033[0m---Servicios en línea---\n")
+      #llamamos a la funcion de servicios en linea 
 			Biblioteca.serviciosEnLinea()
+    #decimo caso 
 		case 10:
+      #limpia la pantalla 
 			system('clear')
+      #opcion de registro de devolucion de los libros 
 			print("\033[0m---Registro de devolución de los libros---\n")
+      #llamamos a la funion de registro de devolucion de libros 
 			Biblioteca.registroDevolucionLibros()
+    # onceavo caso
 		case 11:
+      #limpia la pantalla 
 			system('clear')
+      #opcion de generar informes de la Biblioteca
 			print("\033[0m---Generar informe de la biblioteca---\n")
+      #llamamos a la funcion generar informes 
 			Biblioteca.generarInforme()
+    #doceavo caso 
 		case 12:
+      #limpia la pantalla 
 			system('clear')
+      #opcion de mostrar la estadistica sobre las visitas en la Biblioteca
 			print("\033[0m---Estadísticas sobre el número de visitas a la biblioteca---\n\n")
+      #llamamos a la funcion de obtener la vista en la Biblioteca
 			baseDatos.obtenerVisitasBiblioteca()
+    #treceavo caso
 		case 13:
+      #limpia la pantalla
 			system('clear')
+      #opcion de estadistica del numero de los libros prestados 
 			print("\033[0m---Estadísticas del número de libros prestados, el número de multas---\n")
+      #llamamos a la funcion de obtener libros prestados, esto para hacer la estadistica 
 			baseDatos.obtenerLibrosPrestados()
+    #catorceavo caso
 		case 14:
+      #limpia la pantalla 
 			system('clear')
-			print("\033[0m---Sistema de gestión de la biblioteca---\n")
-			
+      #opcion de sistema de gestion de la Biblioteca
+			print("\033[0m---Sistema de gestión de personal de la biblioteca---\n")
+	#llamamos a la función de gestionDePersonal
+			Biblioteca.gestionDePersonal()
+	# quinceavo caso
 		case 15:
+      #limpia la pantalla 
 			system('clear')
+      # opcion de historia de prestamos 
 			print("\033[0m---Historial de préstamos---\n")
+      #llamamos a la funcion del historial de prestamo que tenga la Biblioteca
 			estudiante.historialPrestamosReservas()
+    #sexteavo caso 
 		case 16:
+      #limpia la pantalla 
 			system('clear')
+      #opcion de reservas de la sala de estudiante para estudiar 
 			print("\033[0m---Reservas de salas de estudio---\n")
+      #llamamos a la funcion de reserva de la sala 
 			Biblioteca.reservaSala()
+    #caso numero 17
 		case 17:
+      #opcion para que se pueda calcular la complejidad ya sea de tiempo o espacio
 			print("\033[0m---Calculo Complejidad tiempo y espacio---\n")
-			complejidad.inicio()
+      #llamamos a la funcion 
+			complejidad.menuComplejidad()
+    # caso numero 18 
 		case 18: 
+      #mensaje de agradecimiento por usar esl software de la Biblioteca
 			print("\033[36mGracias... ¡Vuelve pronto!")
+      #cierra el programa 
 			exit()
+    #caso numero 19  
 		case 19:
+      #mensaje de imprime datos 
 			print("Datos\n")
 			keys = db. keys( )
 			#print(db["Estudiantes"])
@@ -170,11 +283,13 @@ def menu():
 
 if __name__ == "__main__":
 	#Se carga la base de datos de libros
-	#baseDatos.cargarDBLibros()
+	baseDatos.cargarDBLibros()
 	#Se carga la base de datos de estudiantes
-	#baseDatos.cargarDBEstudiantes()
+	baseDatos.cargarDBEstudiantes()
 	#se carga las salas
-	#baseDatos.cargarSalas()
+	baseDatos.cargarSalas()
+	#se carga el personal
+	baseDatos.cargarPersonal()
 	#cargarImagen()
 	cargarLogo()
 	while True:
