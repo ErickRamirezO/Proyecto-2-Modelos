@@ -62,3 +62,4 @@ personal = ["Emily Rodriguez","Michael Martinez","Sarah Perez","David Jackson","
 salarios = ["703","686","721","749","744","731","689"]
 cargo = ["Bibliotecario","Bibliotecario","Auxiliar de biblioteca","Auxiliar de biblioteca","Atención al cliente","Informático","Administrativo"]
 jornada_laboral = ["Completo","Parcial","Completo","Parcial","Nocturna","Completo","Parcial"]
+horas_trabajas = [153, 157, 156, 151, 159, 155, 158]

@@ -111,7 +111,7 @@ def cargarPersonal():
   #mensaje de que esta cargando el personal de biblioteca 
 	print("\033[0mCargando personal de biblioteca...")
 	#lista con las categorias salas de estudio, sala disponible y sala reservada
-	db["Personal"] = db["Salarios"]= db["Cargo"]= db["Jornada_laboral"]=[]
+	db["Personal"] = db["Salarios"]= db["Cargo"]= db["Jornada_laboral"]=db["Horas_trabajas"]=[]
   #  En un ciclo "for", agrega los datos correspondientes a cada una de las categorías a partir de los datos contenidos en una clase llamada "Datos"
 	for i in range(len(Datos.personal)):
     #los datos correspondientes a cada una de las categorías
@@ -122,6 +122,8 @@ def cargarPersonal():
 		db["Cargo"].append(Datos.cargo[i])
 	#los datos correspondientes a cada una de las categorías
 		db["Jornada_laboral"].append(Datos.jornada_laboral[i])
+	#los datos correspondientes a cada una de las categorías
+		db["Horas_trabajas"].append(Datos.horas_trabajas[i])
 
 #extra
 def listadoEstudiantes():
@@ -634,12 +636,16 @@ Además, se genera una gráfica de barras mostrando el número de multas por est
 
 def seguimientoHorasTrabajadasPersonal():
 	"""
- 	 Funcion: Esta función que muestra
+ 	 Funcion: Esta función que muestra las horas trabajadas por cada personal 
 
    Parametros: No, contiene parametros
 
   Retorna: No, retorna ningun valor 
   	"""
+	print("\n\033[0m{:^8}\033[33m{:^30}\033[32m{:^19}".format("Número", "Nombre","Horas Trabajadas"))
+	for i in range(len(db["Personal"])):
+		 #Esta línea imprime un encabezado con el número, el estudiante y el número de visitas a la biblioteca.
+		print("\033[0m{:^8}{:^30}{:^19}".format(i+1, db["Personal"][i],db["Horas_trabajas"][i]))
 
 def informacionDelPersonal():
 	"""

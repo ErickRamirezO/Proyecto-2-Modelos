@@ -206,7 +206,13 @@ def generarInforme():
 
 #punto 14
 def gestionDePersonal():
-  
+	"""
+ Funcion: La función "reservaSala()" permite al usuario ver las salas disponibles y hacer una reserva de una sala específica, si esta está disponible.
+
+ Parametro: No, contiene ningun parametro 
+
+ Retorna: No, retorna ningun dato 
+ 	"""
 	  #Se imprime un menú con las opciones "Volver al menú", "Información del personal"
 	#y "Seguimiento Horas Trabajadas"
 	print("\n[0] Volver al menú\n[1] Información del personal\n[2] Seguimiento horas trabajadas")

@@ -301,7 +301,7 @@ if __name__ == "__main__":
 	#se carga las salas
 	#baseDatos.cargarSalas()
 	#se carga el personal
-	#baseDatos.cargarPersonal()
+	baseDatos.cargarPersonal()
 	#cargarImagen()
 	cargarLogo()
 	while True:
