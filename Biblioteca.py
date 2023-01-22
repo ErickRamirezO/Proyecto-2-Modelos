@@ -206,6 +206,7 @@ def generarInforme():
 
 #punto 14
 def gestionDePersonal():
+  
 	  #Se imprime un menú con las opciones "Volver al menú", "Información del personal"
 	#y "Seguimiento Horas Trabajadas"
 	print("\n[0] Volver al menú\n[1] Información del personal\n[2] Seguimiento horas trabajadas")

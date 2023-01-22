@@ -3,7 +3,7 @@ from replit import Database
 from os import system
 import os,estudiante,Biblioteca,baseDatos,time,complejidad
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQzNTUxMzgsImlhdCI6MTY3NDI0MzUzOCwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.Qxym_jKldgyCkfJuq3jzWAGbz5Jz4s4uq_HI1gg5MsMhB6jGznatCpR-0C3s2ZPSLCDbfaJ0EigHdXKXgv4eiQ")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ0NjY0MDYsImlhdCI6MTY3NDM1NDgwNiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.CKcTKIU9y90DWPlsoAK1dAaX5sL4RcqLxU9TdgDhErquYi_j7R_i4aviCtUAEi3WHibUbEhXw123MLi25_q2Hw")
 
 def cargarImagen():
 	"""
@@ -45,7 +45,7 @@ def cargarLogo():
   #llama a una función llamada "textoInicio()"
 	textoInicio()
   #espera una entrada del usuario para continuar.
-	input("\nPresione una tecla para continuar")
+	input("\nPresione una tecla para poder iniciar ya con el programa :D")
   #limpia la consola de nuevo.
 	system("clear")
 
@@ -57,22 +57,34 @@ def textoInicio():
 
  Retorna: No, retorna ningun tipo de dato
  	"""
-  #imprime una introduccicon del programa 
+  #imprime una introduccion del programa 
 	texto = """BiblioSolutions\n
- Es un programa que permite la gestión de una biblioteca desarrollado\n100% en Python. Este tipo de software ofrece una variedad de funciones como:\n> la adición y eliminación de registros de libros\n> Gestión de préstamos y devoluciones\n> Generación de informes\n> Estadísticas\n> Busqueda de libros en la base de datos de la biblioteca.\n"""
+ Es un programa que permite la gestión de una biblioteca desarrollado\n100% en Python. Este tipo de software ofrece una variedad de funciones como:\n> la adición y eliminación de registros de libros\n> Gestión de préstamos y devoluciones\n> Generación de informes\n> Estadísticas\n> Busqueda de libros en la base de datos de la biblioteca.\n\n"""
+	#imprime una guia de inicio del programa
+	guia = """1) Use el menú de  opciones\nEscoja la opción que desee entre los 16 que se dispone (recuerde ingresar el dato correcto y lea detenidamente)\n2) Registrar usuario\nAquí puede registrar a un usuario siguiendo todos los pasos e ingresando los datos que pida el sistema.\n3)Revisión de catalogo\nPermite buscar y encontrar los diferentes libros ya sea por Titulo o Autor.\n4)Notificaciones\nPuede enviar un aviso a los usuarios para que devuelvan los libros que han solicitado\n5) Estadísticas\nPuede consultar el numero de visitas, numero de multas, numero de libros prestados etc.\n6) Salas de estudio\nPermite al estudiante reservar una sala si es que se encuentra disponible\n"""
   #Utiliza un bucle para imprimir cada letra del texto de forma individual
 	for letra in texto:
 	    print(letra, end="", flush=True)
     #retraso de 0.01 segundos entre cada impresión
 	    time.sleep(0.01)
-		
+	##espera una entrada del usuario para continuar.
+	input("\nPresione una tecla para ver la guia de inicio rapido")
+	#limpiamos la pantalla
+	system("clear")
+	#imprime mensaje de que a continuacion es la guia de inicio rapido
+	print("\033[36m\t\tGuía de inicio Rápido\033[0m")
+	 #Utiliza un bucle para imprimir cada letra del texto de forma individual
+	for letra in guia:
+	    print(letra, end="", flush=True)
+    #retraso de 0.01 segundos entre cada impresión
+	    time.sleep(0.01)
 def regresarmenu():
 	"""
-  Funcion:
+  Funcion: Esta función permite regresar al menu principal si es que se encuentra dentro de una opcion
 
- Parametros:
+ Parametros: No tiene parámetros
 
- Retorna:
+ Retorna: No retorna ningún valor
  	"""
 	system("clear")
 	menu()
@@ -283,13 +295,13 @@ def menu():
 
 if __name__ == "__main__":
 	#Se carga la base de datos de libros
-	baseDatos.cargarDBLibros()
+	#baseDatos.cargarDBLibros()
 	#Se carga la base de datos de estudiantes
-	baseDatos.cargarDBEstudiantes()
+	#baseDatos.cargarDBEstudiantes()
 	#se carga las salas
-	baseDatos.cargarSalas()
+	#baseDatos.cargarSalas()
 	#se carga el personal
-	baseDatos.cargarPersonal()
+	#baseDatos.cargarPersonal()
 	#cargarImagen()
 	cargarLogo()
 	while True:
