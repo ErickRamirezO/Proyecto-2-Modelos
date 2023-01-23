@@ -1,4 +1,4 @@
-import baseDatos, main, re
+import baseDatos, main
 from os import system
 
 
@@ -62,7 +62,12 @@ def registro():
     #Se pide al usuario que ingrese la carrera del estudiante nuevo y se imprime un mensaje confirmando los datos ingresados.
 		else:
 			print("\033[31mNombre inválida, ingrese nombre y apellido")
-	carrera = input("\033[0mIngrese la carrera: ")
+	carrera = ""
+	while not carrera.isalpha():
+	    carrera = input("Ingrese la carrera: ")
+	    if not carrera.isalpha():
+	        print("Error, ingrese solo letras")
+	print("Carrera válida")
 	print(f"\nAñadiendo al estudiante {nombre} de la carrera {carrera}")
   #Se añade el nombre y la carrera del estudiante nuevo a la lista "lista".
 	lista.append(nombre)
@@ -130,19 +135,21 @@ def   historialPrestamosReservas():
 
  Retorna: No, retorna ningun dato 
  	"""
+	#Se muestra el listado de los estudiantes
+	baseDatos.listadoEstudiantes()
   #Se utiliza un bucle while para pedir al usuario que ingrese el nombre y apellido del estudiante del cual se quiere ver el historial de préstamos y reservas.
 	while True:
 		nombre = input(
-		 "\nIngrese el nombre y apellido del estudiante nuevo: ").lower()
+		 "\nIngrese el nombre y apellido del estudiante: ").lower()
     #Se utiliza la función "re.match" para verificar que el nombre ingresado contiene solo letras y luego se utiliza la función "validarNombreApellido" para validar que el nombre y apellido sean correctos. 
-		if (re.match("^[a-zA-Z]*$", nombre) and validarNombreApellido(nombre)):
+		if (validarNombreApellido(nombre)):
 			print("\033[31mNombre inválida, ingrese nombre y apellido")
 			break
     #Si no es así, se informa al usuario y se sale del bucle.
 		else:
 			print("Por favor, ingrese solo letras.")
   #Se utiliza una estructura de control if para determinar si el nombre ingresado existe en la base de datos. Si es así, se llama a la función "obtenerHistorialReservasPrestamos" del módulo "baseDatos" 
-	if baseDatos.obtenerEstudiante(nombre):
+	if baseDatos.verificarEstudiante(nombre):
 		print("\033[0mEl nombre ingresado es \033[32mcorrecto")
 		# Se obtiene el historial
 		baseDatos.obtenerHistorialReservasPrestamos(nombre)

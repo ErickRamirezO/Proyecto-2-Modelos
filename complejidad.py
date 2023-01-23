@@ -2,7 +2,7 @@ import main, baseDatos
 from os import system
 from replit import Database
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ0NjY0MDYsImlhdCI6MTY3NDM1NDgwNiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.CKcTKIU9y90DWPlsoAK1dAaX5sL4RcqLxU9TdgDhErquYi_j7R_i4aviCtUAEi3WHibUbEhXw123MLi25_q2Hw")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ2MDA2NTEsImlhdCI6MTY3NDQ4OTA1MSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.B3_FtPfYaWeH5xbOMyd2PeDLqQdEtEZoP2LTlaMxos9UU8OqEAThrHT3_xa0MXoOyJv15a3aMlr0MHUbAZmsgg")
 
 mensajePrincipal = """
 ----------------------------------

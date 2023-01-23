@@ -232,7 +232,7 @@ def generarInforme(num):
 		main.regresarmenu()
   #Si la opción seleccionada es 1, se llama a la función "mostrarInforme()" de la base de datos, la cual genera un informe con datos estadísticos sobre los libros prestados y devueltos en la biblioteca.
 	else:
-		baseDatos.mostrarInforme()
+		baseDatos.mostrarInforme(1)
 
 #punto 14
 def gestionDePersonal():

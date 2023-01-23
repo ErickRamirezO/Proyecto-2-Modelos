@@ -5,7 +5,7 @@ from os import system
 import matplotlib.pyplot as graficas
 from datetime import date
 
-db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ0NjY0MDYsImlhdCI6MTY3NDM1NDgwNiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.CKcTKIU9y90DWPlsoAK1dAaX5sL4RcqLxU9TdgDhErquYi_j7R_i4aviCtUAEi3WHibUbEhXw123MLi25_q2Hw")
+db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ2MDA2NTEsImlhdCI6MTY3NDQ4OTA1MSwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.B3_FtPfYaWeH5xbOMyd2PeDLqQdEtEZoP2LTlaMxos9UU8OqEAThrHT3_xa0MXoOyJv15a3aMlr0MHUbAZmsgg")
 
 
 def cargarDBLibros():
@@ -708,15 +708,14 @@ Además, se genera una gráfica de barras mostrando el número de multas por est
     #Sumamos las multas generadas de cada estudiante
 		numero_multas += db["Numero_multas"][i]
     #Agregamos el nombre del estudiante a la lista
-		lista_estudiantes.append(str(db["Estudiantes"][i]))
+		lista_estudiantes.append(i+1)
     ##Agregamos el numero de multas generadas por el estudiante a la lista
-		y.append(str(db["Numero_multas"][i]))
+		y.append(db["Numero_multas"][i])
 	print("El Total de libros prestados es: ", numero_libros_prestados)
 	print("El Total de multas generadas es: ", numero_multas)
   ##generamos un grafica de barras con las multas generadas por cada estudiante
-	graficas.bar(lista_estudiantes, y, color='red')
-  #mostramos el nombre de los estudiantes en el eje x
-	graficas.xticks(lista_estudiantes)
+	graficas.bar(y, lista_estudiantes, color='red')
+  #mostramos el nombre de los estudiantes en el eje x}
 	graficas.title("Gráfica estudiantes y numero de multas")
   #mostramos la grafica
 	graficas.show()
