@@ -7,12 +7,14 @@ titulos = [
  "Arquitectura y urbanismo", "Ingeniería de control moderna",
  "Estrategia de negocios", "Ingeniería de software"
 ]
+titulos_nuevos = ["'El Capital' de Karl Marx","'La Divina Comedia' de Dante Alighieri","'El Principito' de Antoine de Saint-Exupéry","'La Iliada' de Homero","'La Odisea' de Homero","'El Quijote' de Miguel de Cervantes","'La Metamorfosis' de Franz Kafka","'Cien años de soledad' de Gabriel García Márquez","'El gran Gatsby' de F. Scott Fitzgerald","'Matar a un ruiseñor' de Harper Lee"]
 #lista autores de los libros
 autores = [
  "Giancoli", "Solomons y Fryhle", "Bruce Alberts", "Charles Morris",
  "John Kenneth Galbraith", "Eduardo Couture", "Rafael Moneo",
  "Katsuhiko Ogata", "Michael Porter", "Ian Sommerville"
 ]
+#isbn = ["978-0316769488","978-0446310789","978-0743273565","978-0618640157","978-0547928227","978-0553577129","978-0062315007","978-0340792322","978-0439708180","978-0439023528"]
 #lista de la disponiblidad de cada libro
 disponibilidad = ["Si", "Si", "No", "Si", "No", "Si", "Si", "Si", "Si", "No"]
 #lista con el numero de copias de cada libro

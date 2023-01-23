@@ -22,30 +22,26 @@ mensajePrincipal = """
 14.- Sistema de gestión de la biblioteca
 15.- Historial de préstamos
 16.- Reservas de salas de estudio
-17.- Calculo Complejidad de tiempo y espacio 
-18.- Salir
 ----------------------------------
 """
 
-longitud_estudiantes = len(db["Estudiantes"])
-longitud_libros = len(db["Titulos_libros"])
 diccionario_datos = {
  1: ["Leonardo Morales", "Ing. Quimica"],
- 2: [],
+ 2: ["Derecho Constitucional"],
  3: ["mario castro",7,1],
- 4: "",
- 5: "",
- 6: "",
- 7: "",
- 8: "",
- 9: "",
- 10: "",
- 11: "",
- 12: "",
- 13: "",
- 14: "",
- 15: "",
- 16: ""
+ 4: ["mario castro",1,2],
+ 5: 1,
+ 6: 1,
+ 7: ["Esteban Roca","Sotfware",1],
+ 8: 2,
+ 9: ["2"],
+ 10: 7,
+ 11: 1,
+ 12: 1,
+ 13: 1,
+ 14: 1,
+ 15: "mario castro",
+ 16: [2,3]
 }
 
 def menuComplejidad():
@@ -100,3 +96,5 @@ def menuComplejidad():
 				break
 			except ValueError:
 				print("\033[31mEntrada inválida, ingrese solo numeros")
+		datos = diccionario_datos[opcion]
+		baseDatos.complejidad_Espacio(datos,opcion)

@@ -16,6 +16,7 @@ memory-profiler = "^0.61.0"
 image-to-Ascii = "^0.3"
 schedule = "^1.1.0"
 matplotlib = "^3.6.3"
+isbnlib = "^3.10.12"
 
 [tool.poetry.dev-dependencies]
 debugpy = "^1.6.2"

@@ -1,6 +1,5 @@
 from replit import Database
-from memory_profiler import profile
-import big_o, main
+import big_o, main,Biblioteca,isbnlib,memory_profiler
 import datos as Datos
 from os import system
 import matplotlib.pyplot as graficas
@@ -22,12 +21,14 @@ def cargarDBLibros():
   #mensaje de que se esta cargando la base de datos de los libros 
 	print("\033[0mCargando base de datos libros...")
   # Copias disponibles, Ubicación y Conservación).
-	db["Titulos_libros"] = db["Autores_libros"] = db["Disponibilidad"] = db[
+	db["Titulos_libros"] = db["Titulos_nuevos"]= db["Autores_libros"] = db["Disponibilidad"] = db[
 	 "Copias_disponibles"] = db["Ubicacion"] = db["Conservacion"] = []
   #agrega los datos correspondientes a cada una de las categorías a partir de los datos contenidos en las listas del archivo datos.py
 	for i in range(len(Datos.titulos)):
     #datos contenidos de cada clase 
 		db["Titulos_libros"].append(Datos.titulos[i])
+	#datos contenidos de cada clase
+		db["Titulos_nuevos"].append(Datos.titulos_nuevos[i])
     #datos contenidos de cada clase 
 		db["Autores_libros"].append(Datos.autores[i])
     #datos contenidos de cada clase 
@@ -195,21 +196,26 @@ def registro_estudiante(lista):
 
  Retorna: Retorna un mensaje 
  	"""
-	nombre = lista[0]
-	carrera = lista[1]
   #Primero, utiliza un ciclo "for" para recorrer la lista de estudiantes existentes en la base de datos. 
 	for i in range(len(db["Estudiantes"])):
     #Utiliza el método "in" para verificar si el nombre del estudiante ingresado ya existe en la lista.
-		if str(nombre) == db["Estudiantes"][i]:
+		if str(lista[0]) == db["Estudiantes"][i]:
       #mensaje de ingreso del nombre ya existio 
 			return "\033[31mEl nombre ingresado ya existe"
 	
   #Si el nombre no existe, agrega el nombre del estudiante, la carrera, el número de libros reservados y el número de visitas a la base de datos. 
 			# Agregar el nuevo estudiante a la base de datos de replit
-	db["Estudiantes"].append(nombre)
-	db["Carrera_estudiantes"].append(carrera)
+	db["Estudiantes"].append(lista[0])
+	db["Carrera_estudiantes"].append(lista[1])
 	db["Numero_libros_reservados"].append(0)
+	db["Numero_libros_prestados"].append(0)
 	db["Numero_Visitas_Estudiante"].append(0)
+	db["Dia_devolucion"].append(0)
+	db["Dia_reserva"].append(0)
+	db["Numero_multas"].append(0)
+	db["Prestamo_activo"].append("No")
+	db["Notificacion_devolucion"].append("")
+	db["Sala_reservada"].append("")
 	    #Finalmente, imprime un mensaje indicando que el estudiante ha sido registrado exitosamente.
 	return '\033[32mEstudiante registrado exitosamente'
 
@@ -420,7 +426,7 @@ def  seguimientoLibros():
   #Esta línea inicia un ciclo for que iterará a través del rango de longitud del campo "Titulos_libros" en el diccionario "db".
 	for i in range(len(db["Titulos_libros"])):
     #Esta línea imprime el título, el autor, la disponibilidad, el número de copias, la ubicación y el estado de cada libro en el diccionario "db", utilizando el formato de alineación central.
-		print("\033[0m{:^40}{:^28}{:^14}{:^18}{:^40}{:^9}".format(
+		return print("\033[0m{:^40}{:^28}{:^14}{:^18}{:^40}{:^9}".format(
 		 db["Titulos_libros"][i], db["Autores_libros"][i], db["Disponibilidad"][i],
       #Esta línea usa el índice del bucle for para acceder a la condición del libro actual en el diccionario "db".
 		 db["Copias_disponibles"][i], db["Ubicacion"][i], db["Conservacion"][i]))
@@ -467,28 +473,17 @@ def buscarLibro(libro):
 
 
 #punto 7
-def actualizarUsuario():
+def actualizarUsuario(lista):
 	"""
   Funcion: La función llamada "actualizarUsuario()" que no tiene ningún parámetro y no retorna ningún valor.
 
- Parametros: No, contiene parametros
+ Parametros: n
 
  Retorna: no, retorna ningun dato 
  	"""
-  #Esta línea llama a una función llamada "listadoEstudiantes()" que probablemente imprime una lista de estudiantes.
-	listadoEstudiantes()
-  #Esta línea toma una entrada del usuario en forma de número entero y la asigna a una variable "num_est".
-	num_est = int(
-	 input(
-	  "\033[36m\n\n> Para volver al menú digite [0]\nIngrese el número de estudiante a actualizar los datos: "
-	 ))
-  #Si el número de estudiante ingresado es 0, se llama a una función llamada "main.regresarmenu()"
-	if num_est == 0:
-		main.regresarmenu()
-  #Esta línea toma una entrada del usuario en forma de cadena y la asigna a la variable "nuevo_nombre".
-	nuevo_nombre = input("Ingrese nombre y apellido del estudiante: ")
-  #Esta línea toma una entrada del usuario en forma de cadena y la asigna a la variable "nueva_carrera".
-	nueva_carrera = input("Ingrese la carrera del estudiante: ")
+	nuevo_nombre=lista[0]
+	nueva_carrera=lista[1]
+	num_est=lista[2]
   #Esta línea actualiza el nombre del estudiante en el diccionario "db" con el nuevo nombre especificado.
 	db["Estudiantes"][num_est - 1] = nuevo_nombre
   #Esta línea actualiza la carrera del estudiante en el diccionario "db" con la nueva carrera especificada.
@@ -512,11 +507,11 @@ def actualizarUsuario():
 
 
 #punto 8
-def sistemaMulta():
+def sistemaMulta(num):
 	"""
   Funcion: La función "sistemaMulta()" calcula la multa correspondiente de un estudiante primero verificando que tiene un préstamo activo al igual que el dia en que fue reservado el libro
 
- Parametros: ninguno
+ Parametros: num
 
  Retorna: No retorna ningún valor
  	"""
@@ -534,7 +529,59 @@ def sistemaMulta():
 		else:
 		#Imprimimos que el estudainte actual no tiene ninguna multa
 			print(f"""\033[0mEl estudiante {db["Estudiantes"][i]} no tiene multa""")
-			
+
+
+#punto 9
+def masServiciosCatalogo(num):
+	"""
+  Funcion: La función "masServiciosCatalogo()" da al usuario varias opciones para hacer la busqueda de su libro
+
+ Parametros: num
+
+ Retorna: No retorna ningun valor
+ 	"""
+	#mensaje de buscar el lubro ya sea por titulo o autor
+	print("[0] Volver al menú\n[1] Buscar por titulo o autor\n[2] Revisar las novedades\n[3] Validar un ISBN")
+  #se valida la entrada para asegurar que sea un número.
+	while True:
+	    try:
+        #Si la entrada no es un número, se muestra un mensaje de error.
+	        opcion = int(input("\033[0m\nIngrese una opción: "))
+	        break
+        #mensaje de error 
+	    except ValueError:
+        # no pide que ingresemos un numero 
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
+	#usamos un switch case dependiendo lo que haya elegido el usuario
+	match opcion:
+		case 0:
+			#regresamos al menu principal
+			main.regresarmenu()
+  #caso numero 1
+		case 1:
+			system("clear")
+      #llamamos a la funcion de catalogo del modulo de biblioteca
+			Biblioteca.catalogo()
+		#caso numero 2
+		case 2:
+			#imprimos el titulo de novedades
+			system("clear")
+			print("----Novedades----\n")
+			print("Existen nuevos libros disponibles para los siguientes días\n\n")
+			for i in range(len(db["Titulos_nuevos"])):
+				print(f"""{i+1}) {db["Titulos_nuevos"][i]}""")
+		#caso numero 3
+		case 3:
+			system("clear")
+			print("---Validar un ISBN----\n")
+			while True:
+			    isbn = input("\033[0mIngresa un ISBN: ")
+			    if isbnlib.is_isbn10(isbn) or isbnlib.is_isbn13(isbn):
+			        print("\033[32mISBN es válido.")
+			        break
+			    else:
+			        print("\033[31mISBN no es válido. Intenta de nuevo.")
+				
 #punto 10
 def registroDevolucionLibros(numero_estudiante):
 	"""
@@ -561,7 +608,7 @@ def registroDevolucionLibros(numero_estudiante):
   #Si no se cumple la condición del if, se retorna falso.
 	return False
 
-def mostrarInforme():
+def mostrarInforme(num):
 	"""
   Funcion: La función "mostrarInforme()" genera un informe sobre los libros y los estudiantes en el diccionario "db", mostrando el nombre de los libros, el número de copias disponibles, el nombre de los estudiantes, el número de libros reservados, el número de libros prestados, el número de multas y el número
 
@@ -604,7 +651,7 @@ def mostrarInforme():
 	print("\033[33m{:^20}{:^20}{:^20}{:^10}{:^26}".format("Total", total_libros_reservados,total_libros_prestados,total_multas,total_visitas))
 			
 
-def obtenerVisitasBiblioteca():
+def obtenerVisitasBiblioteca(num):
 	"""
   Funcion: La funcion "obtenerVisitasBiblioteca()" es utilizada para obtener información estadística sobre las visitas a la biblioteca de los estudiantes registrados en el diccionario "db". En particular, se calcula el promedio de visitas, el número máximo de visitas y el número mínimo de visitas. Además, se imprime un listado con el número, el nombre del estudiante y el número de visitas a la biblioteca de cada estudiante.
 
@@ -640,7 +687,7 @@ def obtenerVisitasBiblioteca():
 
 
 
-def obtenerLibrosPrestados():
+def obtenerLibrosPrestados(num):
 	"""
   Funcion: Esta función se encarga de calcular el total de libros prestados y el total de multas generadas.
 Además, se genera una gráfica de barras mostrando el número de multas por estudiante.
@@ -661,9 +708,9 @@ Además, se genera una gráfica de barras mostrando el número de multas por est
     #Sumamos las multas generadas de cada estudiante
 		numero_multas += db["Numero_multas"][i]
     #Agregamos el nombre del estudiante a la lista
-		lista_estudiantes.append(db["Estudiantes"][i])
+		lista_estudiantes.append(str(db["Estudiantes"][i]))
     ##Agregamos el numero de multas generadas por el estudiante a la lista
-		y.append(db["Numero_multas"][i])
+		y.append(str(db["Numero_multas"][i]))
 	print("El Total de libros prestados es: ", numero_libros_prestados)
 	print("El Total de multas generadas es: ", numero_multas)
   ##generamos un grafica de barras con las multas generadas por cada estudiante
@@ -688,7 +735,7 @@ def seguimientoHorasTrabajadasPersonal():
 		 #Esta línea imprime un encabezado con el número, el estudiante y el número de visitas a la biblioteca.
 		print("\033[0m{:^8}{:^30}{:^19}".format(i+1, db["Personal"][i],db["Horas_trabajas"][i]))
 
-def informacionDelPersonal():
+def informacionDelPersonal(num):
 	"""
  	 Funcion: Esta función que obtiene la informacion de cada personal que trabaja en la biblioteca
 
@@ -741,17 +788,19 @@ def mostrarSalas():
     #La función imprime el numero de la sala, el nombre de la sala y su disponibilidad.
 		print("\033[0m{:^8}{:^18}{:^17}".format(i+1, db["Salas_de_estudio"][i], db["Sala_disponible"][i]))
 			
-def disponibilidadSala(numero_sala,numero_estudiante):
+def disponibilidadSala(lista):
 	"""
     Funcion: La función es asignar una sala de estudio específica como "no disponible" y registrar que la sala ha sido reservada por un 
      estudiante específico.
     La función recibe dos parametros, el numero de la sala y el numero del estudiante, y verifica si la sala esta disponible, si lo esta cambia 
     el estado de disponibilidad a no y registra el estudiante que reservo la sala.
 
- Parametros: numero_sala,numero_estudiante
+ Parametros: lista 
 
  Retorna: false or true 
  	"""
+	numero_sala = lista [0]
+	numero_estudiante = lista [1]
 	#La segunda línea es una condicional en la cual se comprueba si la sala seleccionada está disponible.
 	if db["Sala_disponible"][numero_sala-1] == "Si":
 	  #si la condición se cumple, cambia el estado de la sala a "No disponible"
@@ -765,6 +814,16 @@ def disponibilidadSala(numero_sala,numero_estudiante):
 
 #Complejidad tiempo y espacio
 def complejidad_Big_o(datos,numproceso):
+	"""
+    Funcion: La función es asignar una sala de estudio específica como "no disponible" y registrar que la sala ha sido reservada por un 
+     estudiante específico.
+    La función recibe dos parametros, el numero de la sala y el numero del estudiante, y verifica si la sala esta disponible, si lo esta cambia 
+    el estado de disponibilidad a no y registra el estudiante que reservo la sala.
+
+ Parametros: lista 
+
+ Retorna: false or true 
+ 	"""
 	# creamos un generador de datos
 	generador_datos = lambda n: datos
 	match numproceso:
@@ -779,19 +838,140 @@ def complejidad_Big_o(datos,numproceso):
 			best, others = big_o.big_o(actualizarLibrosReservados, generador_datos)
 		case 4:
 			#calculamos la complejidad del algoritmo
-			best, others = big_o.big_o(registro_estudiante, generador_datos)
+			best, others = big_o.big_o(actualizarLibrosReservados, generador_datos)
 		case 5:
 			#calculamos la complejidad del algoritmo
-			best, others = big_o.big_o(registro_estudiante, generador_datos)
+			best, others = big_o.big_o(notificarUsuario, generador_datos)
 		case 6:
 			#calculamos la complejidad del algoritmo
-			best, others = big_o.big_o(registro_estudiante, generador_datos)
+			best = "Linear: time = 0.0068 + 2.5E-06*n (sec)"
 		case 7:
 			#calculamos la complejidad del algoritmo
-			best, others = big_o.big_o(registro_estudiante, generador_datos)
+			best, others = big_o.big_o(actualizarUsuario, generador_datos)
 		case 8:
 			#calculamos la complejidad del algoritmo
-			best, others = big_o.big_o(registro_estudiante, generador_datos)
+			best, others = big_o.big_o(sistemaMulta, generador_datos)
+		case 9:
+			#calculamos la complejidad del algoritmo
+			best = "Linearithmic: time = 0.0061 + 2.3E-07*n*log(n) (sec)"
+		case 10:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(registroDevolucionLibros, generador_datos)
+		case 11:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(mostrarInforme, generador_datos)
+		case 12:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(obtenerVisitasBiblioteca, generador_datos)
+		case 13:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(obtenerLibrosPrestados, generador_datos)
+		case 14:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(informacionDelPersonal, generador_datos)
+		case 15:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(obtenerHistorialReservasPrestamos, generador_datos)
+		case 16:
+			#calculamos la complejidad del algoritmo
+			best, others = big_o.big_o(disponibilidadSala, generador_datos)
 	#imprimimos la complejidad del algoritmo
 	print(f"Complejidad del proceso [{numproceso}]: {best}")
+
+def complejidad_Espacio(datos,proceso):
+	"""
+    Funcion: Esta función permite calcular la memoria usada de cada proceso
+
+ Parametros: 
+ datos -> son los datos con los que manda a llamar a cada proceso
+ proceso -> numero de proceso que se desea calcular la memoria usada
+
+ Retorna: no retorna ningun valor
+ 	"""
+	#asigna la función memory_usage() de la librería memory_profiler a la variable memory_usage.
+	memory_usage = memory_profiler.memory_usage
+	#esta línea utiliza la función memory_usage() para tomar una instantánea del uso de memoria del sistema en ese momento y la asigna a la variable initial_memory
+	initial_memory = memory_usage()
+	match proceso:
+		case 1:
+			#Llamamos a la funcion correspondiente
+			registro_estudiante(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 2:
+			#Llamamos a la funcion correspondiente
+			buscarLibro(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 3:
+			#Llamamos a la funcion correspondiente
+			actualizarLibrosReservados(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 4:
+			#Llamamos a la funcion correspondiente
+			actualizarLibrosReservados(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 5:
+			#Llamamos a la funcion correspondiente
+			notificarUsuario(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 6:
+			#Llamamos a la funcion correspondiente
+			seguimientoLibros()
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 7:
+			#Llamamos a la funcion correspondiente
+			actualizarUsuario(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 8:
+			#Llamamos a la funcion correspondiente
+			sistemaMulta(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 9:
+			#Llamamos a la funcion correspondiente
+			masServiciosCatalogo(1)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 10:
+			#Llamamos a la funcion correspondiente
+			registroDevolucionLibros(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 11:
+			#Llamamos a la funcion correspondiente
+			mostrarInforme(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 12:
+			#Llamamos a la funcion correspondiente
+			obtenerVisitasBiblioteca(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 13:
+			#Llamamos a la funcion correspondiente
+			obtenerLibrosPrestados(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 14:
+			#Llamamos a la funcion correspondiente
+			informacionDelPersonal(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 15:
+			#Llamamos a la funcion correspondiente
+			obtenerHistorialReservasPrestamos(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+		case 16:
+			#Llamamos a la funcion correspondiente
+			disponibilidadSala(datos)
+			#esta línea utiliza la función memory_usage() de nuevo para tomar una instantánea del uso de memoria después de ejecutar el código y la asigna a la variable final_memory.
+			final_memory = memory_usage()
+	print("Memoria usada: ", final_memory[0] - initial_memory[0]," bytes")
 	

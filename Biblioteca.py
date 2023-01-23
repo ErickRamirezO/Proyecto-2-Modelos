@@ -52,7 +52,38 @@ def catalogo():
 				print("\033[31mLo sentimos no hubo éxito en su búsqueda por autor...")
 
 
-def reservaLibros(nombre,reserva_o_prestamos):
+def actualizarEstudiante():
+	#se crea una lsta vacia
+	lista = []
+	#Esta línea llama a una función llamada "listadoEstudiantes()" que probablemente imprime una lista de estudiantes.
+	baseDatos.listadoEstudiantes()
+	 #La entrada es validada para asegurar que es un número. Si la entrada no es un número, se muestra un mensaje de error.
+	while True:
+		try:
+  #Esta línea toma una entrada del usuario en forma de número entero y la asigna a una variable "num_est".
+			num_est = int(
+			 input(
+			  "\033[36m\n\n> Para volver al menú digite [0]\nIngrese el número de estudiante a actualizar los datos: "
+			 ))
+        #evalua el erro 
+		except ValueError:
+        # mensaje de que solo se permiten ingresar numeros 
+			print("\033[31mEntrada inválida, ingrese solo numeros")
+  #Si el número de estudiante ingresado es 0, se llama a una función llamada "main.regresarmenu()"
+	if num_est == 0:
+		main.regresarmenu()
+	else:
+		 #Esta línea toma una entrada del usuario en forma de cadena y la asigna a la variable "nuevo_nombre".
+		nuevo_nombre = input("Ingrese nombre y apellido del estudiante: ")
+		lista.append(nuevo_nombre)
+	  #Esta línea toma una entrada del usuario en forma de cadena y la asigna a la variable "nueva_carrera".
+		nueva_carrera = input("Ingrese la carrera del estudiante: ")
+		lista.append(nueva_carrera)
+		lista.append(num_est)
+		baseDatos.actualizarUsuario(lista)
+
+
+def reservaLibros(lista):
 	"""
   Funcion: La función permite al usuario reservar un libro de una lista presentada previamente, validando que el libro elegido está disponible y actualizando la base de datos con la información de la reserva del usuario.
 
@@ -60,7 +91,12 @@ def reservaLibros(nombre,reserva_o_prestamos):
 
  Retorna: No, retorna ningun dato 
  	"""
-	lista = []
+	#listas vacia
+	lista = lista2=[]
+	#asignamos el valor que se encuentra en la posicion 0 de la lista
+	nombre = lista[0]
+	#asignamos el valor que se encuentra en la posicion 1 de la lista
+	reserva_o_prestamos = lista [1]
   #Se llama al método "obtenerLibros" en el objeto "baseDatos" para mostrar una lista de libros.
 	baseDatos.obtenerLibros()
   #La entrada es validada para asegurar que es un número. Si la entrada no es un número, se muestra un mensaje de error.
@@ -83,13 +119,13 @@ def reservaLibros(nombre,reserva_o_prestamos):
 		print("\033[31m El ejemplar elegido no se puede reservar o prestar porque no se encuentra disponible elija otro")
 		input("\n\033[0mPresione una tecla para continuar... ")
 		system("clear")
-		reservaLibros(nombre)
+		reservaLibros(lista)
   #En caso contrario, la función llama al método "actualizarLibrosReservados" en el objeto "baseDatos", pasando el nombre del usuario, la elección del usuario menos uno y el parámetro "reserva_o_prestamos"
 	else:
-		lista.append(nombre)
-		lista.append(opcion-1)
-		lista.append(reserva_o_prestamos)
-		baseDatos.actualizarLibrosReservados(lista)
+		lista2.append(nombre)
+		lista2.append(opcion-1)
+		lista2.append(reserva_o_prestamos)
+		baseDatos.actualizarLibrosReservados(lista2)
 	
 def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	"""
@@ -99,6 +135,8 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 
  Retorna:No, retorna ningun dato 
  	"""
+	#creamos una lista vacia
+	lista = []
   #Se llama al método "listadoEstudiantes" en el objeto "baseDatos" para mostrar una lista de estudiantes.
 	baseDatos.listadoEstudiantes()
   #El usuario es solicitado a ingresar el nombre y apellido del estudiante para hacer la reserva o préstamo del libro.
@@ -114,7 +152,12 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 		    print("\033[33m Puede hacer la reserva de un libro\n")
 		    input("\n\033[0mPresione una tecla para continuar... ")
 		    system("clear")
-		    reservaLibros(nombre,reserva_o_prestamos)
+			#añadimos el nombre a la lista
+		    lista.append(nombre)
+			#añadimos 1 si es reserva o 2 si es prestamo a la lista
+		    lista.append(reserva_o_prestamos)
+			#llamamos a la funcion reservaLibros
+		    reservaLibros(lista)
       #Si el estudiante tiene más de 3 libros reservados, se muestra un mensaje de error indicando que ya alcanzó el número máximo de reservas.
 	    else:
 		    print("\033[31m Lo sentimos no puede hacer la reserva de un libro porque alcanzo el número máximo de reservas (3)")
@@ -128,17 +171,12 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	    system("clear")
 	    ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos)
 
-
-#punto 9
-def serviciosEnLinea():
-	pass
-		
 #punto10
 def registroDevolucionLibros():
 	"""
   Funcion: La función "registroDevolucionLibros()" permite al usuario seleccionar un estudiante de una lista de estudiantes registrados y registrar la devolución de un libro prestado por ese estudiante.
 
- Parametros: No, contiene parametros 
+ Parametros: num 
 
  Retorna: No, retorna ningun valor 
  	"""
@@ -175,7 +213,7 @@ def registroDevolucionLibros():
 			print("El alumno no tiene un préstamo activo")
 		
 
-def generarInforme():
+def generarInforme(num):
 	"""
  Funcion: La función "generarInforme()" permite al usuario generar un informe con estadisticas sobre los libros prestados y devueltos.
 
@@ -223,8 +261,8 @@ def gestionDePersonal():
 	if opcion ==0:
 		main.regresarmenu()
 	#Si la opción seleccionada es 1, se llama a la función "informacionDelPersonal()" de la base de datos, la cual mostrará una tabla con los datos de cada personal de la biblioteca.
-	elif opcion ==1:
-		baseDatos.informacionDelPersonal()
+	elif opcion == 1:
+		baseDatos.informacionDelPersonal(1)
 	#Si la opción seleccionada es 2 se llama a la función "informacionDelPersonal()" de la base de datos, la cual mostrará una tabla con los datos de cada personal de la biblioteca.
 	else:
 		baseDatos.seguimientoHorasTrabajadasPersonal()
@@ -238,6 +276,8 @@ def reservaSala():
 
  Retorna: No, retorna ningun dato 
  	"""
+	#lista vacia 
+	lista = []
   #Se imprime un menú con las opciones "Volver al menú" y "Mostrar salas"
 	print("\n[0] Volver al menú\n[1] Mostrar salas\n")
   #Se utiliza un bucle while para asegurar que el valor ingresado para la variable "opcion" sea un número entero. En caso de que no sea un número, se imprime un mensaje de error.
@@ -283,8 +323,11 @@ def reservaSala():
 			    except ValueError:
             #en caso de no ingresar bien, saldra un mensaje de error que ingrese solo numero 
 				        print("\033[31mEntrada inválida, ingrese solo numeros")
-      #Si la función "disponibilidadSala" retorna true, significa que se ha reservado la sala con éxito.
-			if baseDatos.disponibilidadSala(numero_sala,numero_estudiante):
+      #Se añade los datos de numero_sala y numero_estudiante a la lista
+			lista.append(numero_sala)
+			lista.append(numero_estudiante)
+			 #Si la función "disponibilidadSala" retorna true, significa que se ha reservado la sala con éxito.
+			if baseDatos.disponibilidadSala(lista):
 				print("Reserva de la sala fue realizada con éxito")
       #Si la función "disponibilidadSala" retorna false, significa que la sala no está disponible para ser reservada, y se imprime un mensaje indicando que no se puede reservar la sala.
 			else:

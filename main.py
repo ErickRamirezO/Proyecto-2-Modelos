@@ -100,7 +100,7 @@ mensajePrincipal = """BiblioSolutions 📚
 6.- Seguimiento libros
 7.- Gestión de usuarios
 8.- Sistema de multas
-9.- Servicios en línea: permite a los usuarios buscar y reservar materiales en línea
+9.- Servicios en línea: buscar libros, novedades, validar ISBN
 10.- Registro de devolución de los libros
 11.- Generar informe de la biblioteca
 12.- Estadísticas sobre el número de visitas a la biblioteca
@@ -195,7 +195,7 @@ def menu():
       #opcion de gestion de usuarios 
 			print("\033[0m---Gestión de usuarios---\n")
       #llamamos a la funcion de actualizar usuario 
-			baseDatos.actualizarUsuario()
+			baseDatos.actualizarUsuario(1)
     #octavo caso
 		case 8:
       #limpiamos la pantalla
@@ -203,7 +203,7 @@ def menu():
       #opcion de las multas 
 			print("\033[0m---Sistema de multas---\n")
       #llamamos a la funcion de sistema de multas 
-			baseDatos.sistemaMulta()
+			baseDatos.sistemaMulta(1)
     #noveno caso 
 		case 9:
       #limpia la pantalla
@@ -211,7 +211,7 @@ def menu():
       #opcion del servicio en linea de la Biblioteca
 			print("\033[0m---Servicios en línea---\n")
       #llamamos a la funcion de servicios en linea 
-			Biblioteca.serviciosEnLinea()
+			baseDatos.masServiciosCatalogo(1)
     #decimo caso 
 		case 10:
       #limpia la pantalla 
@@ -227,7 +227,7 @@ def menu():
       #opcion de generar informes de la Biblioteca
 			print("\033[0m---Generar informe de la biblioteca---\n")
       #llamamos a la funcion generar informes 
-			Biblioteca.generarInforme()
+			Biblioteca.generarInforme(1)
     #doceavo caso 
 		case 12:
       #limpia la pantalla 
@@ -235,7 +235,7 @@ def menu():
       #opcion de mostrar la estadistica sobre las visitas en la Biblioteca
 			print("\033[0m---Estadísticas sobre el número de visitas a la biblioteca---\n\n")
       #llamamos a la funcion de obtener la vista en la Biblioteca
-			baseDatos.obtenerVisitasBiblioteca()
+			baseDatos.obtenerVisitasBiblioteca(1)
     #treceavo caso
 		case 13:
       #limpia la pantalla
@@ -243,7 +243,7 @@ def menu():
       #opcion de estadistica del numero de los libros prestados 
 			print("\033[0m---Estadísticas del número de libros prestados, el número de multas---\n")
       #llamamos a la funcion de obtener libros prestados, esto para hacer la estadistica 
-			baseDatos.obtenerLibrosPrestados()
+			baseDatos.obtenerLibrosPrestados(1)
     #catorceavo caso
 		case 14:
       #limpia la pantalla 
