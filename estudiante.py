@@ -122,7 +122,7 @@ def notificacion():
 
 
 #punto 15
-def historialPrestamosReservas():
+def   historialPrestamosReservas():
 	"""
   Funcion: La funcion "historialPrestamosReservas()" nos muestra el historial de todos los usuarios registrados en la biblioteca 
 

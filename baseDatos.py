@@ -411,7 +411,7 @@ def notificarUsuario(numero_estudiante):
 		notificarUsuario(numero)
 
 
-def  seguimientoLibros():
+def seguimientoLibros():
 	"""
   Funcion: imprime los encabezados de diferentes campos de los libros
 
@@ -426,7 +426,7 @@ def  seguimientoLibros():
   #Esta línea inicia un ciclo for que iterará a través del rango de longitud del campo "Titulos_libros" en el diccionario "db".
 	for i in range(len(db["Titulos_libros"])):
     #Esta línea imprime el título, el autor, la disponibilidad, el número de copias, la ubicación y el estado de cada libro en el diccionario "db", utilizando el formato de alineación central.
-		return print("\033[0m{:^40}{:^28}{:^14}{:^18}{:^40}{:^9}".format(
+		print("\033[0m{:^40}{:^28}{:^14}{:^18}{:^40}{:^9}".format(
 		 db["Titulos_libros"][i], db["Autores_libros"][i], db["Disponibilidad"][i],
       #Esta línea usa el índice del bucle for para acceder a la condición del libro actual en el diccionario "db".
 		 db["Copias_disponibles"][i], db["Ubicacion"][i], db["Conservacion"][i]))

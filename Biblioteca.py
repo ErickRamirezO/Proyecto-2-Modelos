@@ -55,32 +55,31 @@ def catalogo():
 def actualizarEstudiante():
 	#se crea una lsta vacia
 	lista = []
+	opcion=0
 	#Esta línea llama a una función llamada "listadoEstudiantes()" que probablemente imprime una lista de estudiantes.
 	baseDatos.listadoEstudiantes()
 	 #La entrada es validada para asegurar que es un número. Si la entrada no es un número, se muestra un mensaje de error.
 	while True:
-		try:
-  #Esta línea toma una entrada del usuario en forma de número entero y la asigna a una variable "num_est".
-			num_est = int(
-			 input(
-			  "\033[36m\n\n> Para volver al menú digite [0]\nIngrese el número de estudiante a actualizar los datos: "
-			 ))
-        #evalua el erro 
-		except ValueError:
-        # mensaje de que solo se permiten ingresar numeros 
-			print("\033[31mEntrada inválida, ingrese solo numeros")
+	    try:
+        #Si la entrada no es un número, se muestra un mensaje de error.
+	        opcion = int(input("\033[0m\nIngrese el numero del estudiante a actualizar: "))
+	        if opcion ==0:
+            #nos retorna al main 
+		        main.regresarmenu()
+	        break
+        #mensaje de error 
+	    except ValueError:
+        # no pide que ingresemos un numero 
+	        print("\033[31mEntrada inválida, ingrese solo numeros")
   #Si el número de estudiante ingresado es 0, se llama a una función llamada "main.regresarmenu()"
-	if num_est == 0:
-		main.regresarmenu()
-	else:
 		 #Esta línea toma una entrada del usuario en forma de cadena y la asigna a la variable "nuevo_nombre".
-		nuevo_nombre = input("Ingrese nombre y apellido del estudiante: ")
-		lista.append(nuevo_nombre)
+	nuevo_nombre = input("Ingrese nombre y apellido del estudiante: ")
 	  #Esta línea toma una entrada del usuario en forma de cadena y la asigna a la variable "nueva_carrera".
-		nueva_carrera = input("Ingrese la carrera del estudiante: ")
-		lista.append(nueva_carrera)
-		lista.append(num_est)
-		baseDatos.actualizarUsuario(lista)
+	nueva_carrera = input("Ingrese la carrera del estudiante: ")
+	lista.append(nuevo_nombre)
+	lista.append(nueva_carrera)
+	lista.append(opcion)
+	baseDatos.actualizarUsuario(lista)
 
 
 def reservaLibros(lista):
@@ -92,18 +91,18 @@ def reservaLibros(lista):
  Retorna: No, retorna ningun dato 
  	"""
 	#listas vacia
-	lista = lista2=[]
+	lista2 =[]
 	#asignamos el valor que se encuentra en la posicion 0 de la lista
 	nombre = lista[0]
 	#asignamos el valor que se encuentra en la posicion 1 de la lista
-	reserva_o_prestamos = lista [1]
+	reserva_o_prestamos = lista[1]
   #Se llama al método "obtenerLibros" en el objeto "baseDatos" para mostrar una lista de libros.
 	baseDatos.obtenerLibros()
   #La entrada es validada para asegurar que es un número. Si la entrada no es un número, se muestra un mensaje de error.
 	while True:
 	    try:
         #mensaje de ingreso del numero de libros que desee reservar el usuario 
-	        opcion = int(input("\033[0m\nIngrese el número del libro a reservar: "))
+	        opcion = input("\033[0m\nIngrese el número del libro a reservar: ")
         # si el numero es igual a 0 nos va a regresar al menu
 	        if opcion == 0:
             #aqui se regresa al menu ya que ingreso 0
@@ -121,11 +120,11 @@ def reservaLibros(lista):
 		system("clear")
 		reservaLibros(lista)
   #En caso contrario, la función llama al método "actualizarLibrosReservados" en el objeto "baseDatos", pasando el nombre del usuario, la elección del usuario menos uno y el parámetro "reserva_o_prestamos"
-	else:
-		lista2.append(nombre)
-		lista2.append(opcion-1)
-		lista2.append(reserva_o_prestamos)
-		baseDatos.actualizarLibrosReservados(lista2)
+	
+	lista2.append(nombre)
+	lista2.append(opcion-1)
+	lista2.append(reserva_o_prestamos)
+	baseDatos.actualizarLibrosReservados(lista2)
 	
 def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	"""
@@ -141,11 +140,8 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
 	baseDatos.listadoEstudiantes()
   #El usuario es solicitado a ingresar el nombre y apellido del estudiante para hacer la reserva o préstamo del libro.
 	nombre = input("\033[0m> Para volver al menú digite [0]\nIngrese el nombre y apellido del estudiante: ").lower()
-  #Si el usuario ingresa 0, se llama a la función "main.regresarmenu()" para regresar al menú principal.
-	if int(nombre) == 0:
-		main.regresarmenu()
 	#verificar que ingrese solo letras y se verifica en la base de datos el nombre del estudiante
-	if baseDatos.validarEstudiante(nombre):
+	if baseDatos.verificarEstudiante(nombre):
 	    print("\033[0mEl nombre ingresado es \033[32mcorrecto")
 		# Se verifica que no tenga más de 3 libros reservados
 	    if baseDatos.validarNumeroReservaLibros(nombre)<3: 
@@ -161,7 +157,7 @@ def ingresoDatosParaReservaOPrestamoLibro(reserva_o_prestamos):
       #Si el estudiante tiene más de 3 libros reservados, se muestra un mensaje de error indicando que ya alcanzó el número máximo de reservas.
 	    else:
 		    print("\033[31m Lo sentimos no puede hacer la reserva de un libro porque alcanzo el número máximo de reservas (3)")
-  #Si el nombre del estudiante ingresado no es válido, se muestra un mensaje de error indicando que la entrada no es válida y no se encuentra en la base de datos
+	#Si el nombre del estudiante ingresado no es válido, se muestra un mensaje de error indicando que la entrada no es válida y no se encuentra en la base de datos
 	else:
     #mensaje de que no es valido lo ingresado 
 	    print("\033[31mLa entrada no es válida, no se encuentra en la base de datos")

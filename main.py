@@ -1,7 +1,7 @@
 from image_to_ascii import ImageToAscii
 from replit import Database
 from os import system
-import os,estudiante,Biblioteca,baseDatos,time,complejidad
+import estudiante,Biblioteca,baseDatos,time,complejidad
 
 db = Database("https://kv.replit.com/v0/eyJhbGciOiJIUzUxMiIsImlzcyI6ImNvbm1hbiIsImtpZCI6InByb2Q6MSIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb25tYW4iLCJleHAiOjE2NzQ0NjY0MDYsImlhdCI6MTY3NDM1NDgwNiwiZGF0YWJhc2VfaWQiOiJkZDJhOTk1OS0xYjAzLTRiNmEtODkwZS0yMzhhM2ViYWM4M2MiLCJ1c2VyIjoiRVJJQ0tQQVRSSUNJT1BBIiwic2x1ZyI6IlByb3llY3RvLTItTW9kZWxvcyJ9.CKcTKIU9y90DWPlsoAK1dAaX5sL4RcqLxU9TdgDhErquYi_j7R_i4aviCtUAEi3WHibUbEhXw123MLi25_q2Hw")
 
@@ -176,8 +176,6 @@ def menu():
 			system('clear')
       #mensaje de notificacion
 			print("\033[0m---Notificaciones---\n")
-      #mensaje de que se envio la notificacion a los usurarios 
-			print(">Se han enviado notificaciones a los siguientes usuarios")
       #llamamos a la funcion de notificacion
 			estudiante.notificacion()
     #sexto caso 
@@ -195,7 +193,7 @@ def menu():
       #opcion de gestion de usuarios 
 			print("\033[0m---Gestión de usuarios---\n")
       #llamamos a la funcion de actualizar usuario 
-			baseDatos.actualizarUsuario(1)
+			Biblioteca.actualizarEstudiante()
     #octavo caso
 		case 8:
       #limpiamos la pantalla

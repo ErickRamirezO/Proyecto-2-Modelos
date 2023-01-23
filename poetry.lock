@@ -63,6 +63,14 @@ python-versions = "*"
 numpy = "*"
 
 [[package]]
+name = "cachetools"
+version = "5.3.0"
+description = "Extensible memoizing collections and decorators"
+category = "main"
+optional = false
+python-versions = "~=3.7"
+
+[[package]]
 name = "certifi"
 version = "2022.9.24"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -198,6 +206,14 @@ description = "A list-like structure which implements collections.abc.MutableSeq
 category = "main"
 optional = false
 python-versions = ">=3.7"
+
+[[package]]
+name = "future"
+version = "0.18.3"
+description = "Clean single-source support for Python 3 and 2"
+category = "main"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "idna"
@@ -365,6 +381,17 @@ qa = ["flake8 (==3.8.3)", "mypy (==0.782)"]
 testing = ["docopt", "pytest (<6.0.0)"]
 
 [[package]]
+name = "pefile"
+version = "2022.5.30"
+description = "Python PE parsing module"
+category = "main"
+optional = false
+python-versions = ">=3.6.0"
+
+[package.dependencies]
+future = "*"
+
+[[package]]
 name = "pillow"
 version = "9.4.0"
 description = "Python Imaging Library (Fork)"
@@ -398,6 +425,18 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [package.extras]
 test = ["ipaddress", "mock", "enum34", "pywin32", "wmi"]
+
+[[package]]
+name = "py2exe"
+version = "0.13.0.0"
+description = "Build standalone executables for Windows"
+category = "main"
+optional = false
+python-versions = ">=3.7, <3.12"
+
+[package.dependencies]
+cachetools = "*"
+pefile = "*"
 
 [[package]]
 name = "pyflakes"
@@ -679,7 +718,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "flake8 
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "58e715a2f688e4cf882517151b7186bbb64278f9ec07a5c8b544022ef8a6ce66"
+content-hash = "c2a06d78cc6568b6f4048cd9b52089cdea5bb97bd2e577bcea6c1c9937564432"
 
 [metadata.files]
 aiohttp = []
@@ -687,6 +726,7 @@ aiosignal = []
 async-timeout = []
 attrs = []
 big-o = []
+cachetools = []
 certifi = []
 charset-normalizer = []
 click = []
@@ -698,6 +738,7 @@ dnspython = []
 flask = []
 fonttools = []
 frozenlist = []
+future = []
 idna = []
 image-to-ascii = []
 importlib-metadata = []
@@ -713,9 +754,11 @@ multidict = []
 numpy = []
 packaging = []
 parso = []
+pefile = []
 pillow = []
 pluggy = []
 psutil = []
+py2exe = []
 pyflakes = []
 pymongo = []
 pyparsing = []
